@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="fire_accidents_title">Fire Department - Accident Management</title>
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/dashboard.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/emergency.css">
+    <link rel="stylesheet" href="src/css/rtl.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title" data-lang-key="fire_accidents_title">Fire Department - Accident Management</h1>
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <button class="language-btn" id="languageToggle">
+                            <span id="currentLang">EN</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 12l-4-4h8l-4 4z"/>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown" id="languageDropdown">
+                            <button class="language-option" data-lang="en">English</button>
+                            <button class="language-option" data-lang="ar">العربية</button>
+                        </div>
+                    </div>
+                    <div class="current-time" id="currentTime"></div>
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'" data-lang-key="back_to_main">
+                        Back to Main Dashboard
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="service-nav">
+            <div class="nav-tabs">
+                <button class="nav-tab" onclick="window.location.href='fire-road-condition.html'" data-lang-key="road_condition_dashboard">Road Condition Dashboard</button>
+                <button class="nav-tab active" onclick="window.location.href='fire-accidents.html'" data-lang-key="accident_management">Accident Management</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="accidents-section">
+                <h2 data-lang-key="accident_management">Accident Management</h2>
+                <div class="accidents-list" id="accidentsList">
+                    <!-- Accidents will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <audio id="alertSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0" type="audio/wav">
+    </audio>
+
+    <script src="src/js/language.js"></script>
+    <script src="src/js/main.js"></script>
+    <script src="src/js/fire-accidents.js"></script>
+</body>
+</html>

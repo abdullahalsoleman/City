@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="main_title">Smart City Traffic Control - Analytics Dashboard</title>
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/dashboard.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/emergency.css">
+    <link rel="stylesheet" href="src/css/rtl.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title" data-lang-key="main_title">Smart City Traffic Control - Analytics Dashboard</h1>
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <button class="language-btn" id="languageToggle">
+                            <span id="currentLang">EN</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 12l-4-4h8l-4 4z"/>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown" id="languageDropdown">
+                            <button class="language-option" data-lang="en">English</button>
+                            <button class="language-option" data-lang="ar">العربية</button>
+                        </div>
+                    </div>
+                    <div class="current-time" id="currentTime"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Emergency Services Navigation -->
+            <section class="services-section">
+                <h2 data-lang-key="emergency_services">Emergency Services</h2>
+                <div class="service-cards">
+                    <div class="service-card" onclick="navigateToService('police')">
+                        <div class="service-icon">🚔</div>
+                        <div class="service-info">
+                            <h3 data-lang-key="police_department">Police Department</h3>
+                            <p data-lang-key="police_desc">Traffic monitoring and accident management</p>
+                            <div class="card-status">
+                                <span class="status-badge active" data-lang-key="active">Active</span>
+                                <span class="status-value">12 <span data-lang-key="units">Units</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-card" onclick="navigateToService('ambulance')">
+                        <div class="service-icon">🚑</div>
+                        <div class="service-info">
+                            <h3 data-lang-key="ambulance_service">Ambulance Service</h3>
+                            <p data-lang-key="ambulance_desc">Emergency medical response and road health</p>
+                            <div class="card-status">
+                                <span class="status-badge active" data-lang-key="active">Active</span>
+                                <span class="status-value">8 <span data-lang-key="units">Units</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-card" onclick="navigateToService('fire')">
+                        <div class="service-icon">🚒</div>
+                        <div class="service-info">
+                            <h3 data-lang-key="fire_department">Fire Department</h3>
+                            <p data-lang-key="fire_desc">Fire response and infrastructure monitoring</p>
+                            <div class="card-status">
+                                <span class="status-badge active" data-lang-key="active">Active</span>
+                                <span class="status-value">6 <span data-lang-key="units">Units</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-card" onclick="navigateToService('ai')">
+                        <div class="service-icon">🤖</div>
+                        <div class="service-info">
+                            <h3 data-lang-key="ai_control">AI Traffic Control</h3>
+                            <p data-lang-key="ai_desc">Automated traffic management system</p>
+                            <div class="card-status">
+                                <span class="status-badge processing" data-lang-key="processing">Processing</span>
+                                <span class="status-value">24/7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Dashboard -->
+            <section class="analytics-section">
+                <h2 data-lang-key="analytics_dashboard">Analytics Dashboard</h2>
+                <div class="analytics-grid">
+                    <!-- System Overview -->
+                    <div class="analytics-card">
+                        <h3 data-lang-key="system_overview">System Overview</h3>
+                        <div class="stats-container">
+                            <div class="stat-item">
+                                <span class="stat-label" data-lang-key="intersections">Intersections</span>
+                                <span class="stat-value">24</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label" data-lang-key="avg_wait">Avg Wait</span>
+                                <span class="stat-value">2.3min</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label" data-lang-key="flow_efficiency">Flow Efficiency</span>
+                                <span class="stat-value">87%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Traffic Statistics -->
+                    <div class="analytics-card">
+                        <h3 data-lang-key="traffic_stats">Traffic Statistics</h3>
+                        <div class="chart-container" id="trafficChart">
+                            <canvas id="trafficCanvas" width="300" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Incident Summary -->
+                    <div class="analytics-card">
+                        <h3 data-lang-key="incident_summary">Incident Summary</h3>
+                        <div class="incident-types">
+                            <div class="incident-type">
+                                <div class="incident-dot accidents"></div>
+                                <span data-lang-key="accidents">Accidents</span>
+                                <span class="incident-count">3</span>
+                            </div>
+                            <div class="incident-type">
+                                <div class="incident-dot breakdowns"></div>
+                                <span data-lang-key="breakdowns">Breakdowns</span>
+                                <span class="incident-count">1</span>
+                            </div>
+                            <div class="incident-type">
+                                <div class="incident-dot roadwork"></div>
+                                <span data-lang-key="roadwork">Road Work</span>
+                                <span class="incident-count">2</span>
+                            </div>
+                        </div>
+                        <div class="response-time">
+                            <span data-lang-key="avg_response">Avg Response Time</span>
+                            <span class="response-value">4.2min</span>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Units Status -->
+                    <div class="analytics-card">
+                        <h3 data-lang-key="emergency_units">Emergency Units Status</h3>
+                        <div class="unit-status">
+                            <div class="unit-row">
+                                <span data-lang-key="police">Police</span>
+                                <div class="unit-bar">
+                                    <div class="unit-fill" style="width: 75%"></div>
+                                </div>
+                                <span class="unit-count">9/12</span>
+                            </div>
+                            <div class="unit-row">
+                                <span data-lang-key="ambulance">Ambulance</span>
+                                <div class="unit-bar">
+                                    <div class="unit-fill" style="width: 62%"></div>
+                                </div>
+                                <span class="unit-count">5/8</span>
+                            </div>
+                            <div class="unit-row">
+                                <span data-lang-key="fire">Fire</span>
+                                <div class="unit-bar">
+                                    <div class="unit-fill" style="width: 83%"></div>
+                                </div>
+                                <span class="unit-count">5/6</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Health -->
+                    <div class="analytics-card">
+                        <h3 data-lang-key="system_health">System Health</h3>
+                        <div class="health-indicators">
+                            <div class="health-item">
+                                <div class="health-icon operational">●</div>
+                                <div class="health-details">
+                                    <span data-lang-key="ai_processing">AI Processing</span>
+                                    <span class="health-status" data-lang-key="operational">Operational</span>
+                                </div>
+                            </div>
+                            <div class="health-item">
+                                <div class="health-icon operational">●</div>
+                                <div class="health-details">
+                                    <span data-lang-key="sensor_network">Sensor Network</span>
+                                    <span class="health-status" data-lang-key="online">Online</span>
+                                </div>
+                            </div>
+                            <div class="health-item">
+                                <div class="health-icon degraded">●</div>
+                                <div class="health-details">
+                                    <span data-lang-key="communications">Communications</span>
+                                    <span class="health-status" data-lang-key="degraded">Degraded</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="analytics-card">
+                        <h3 data-lang-key="recent_activity">Recent Activity</h3>
+                        <div class="activity-feed" id="activityFeed">
+                            <div class="activity-item">
+                                <span class="activity-time">14:32</span>
+                                <span class="activity-text" data-lang-key="new_incident_detected">New incident detected</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-time">14:28</span>
+                                <span class="activity-text" data-lang-key="traffic_light_updated">Traffic light timing updated</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-time">14:25</span>
+                                <span class="activity-text" data-lang-key="emergency_unit_dispatched">Emergency unit dispatched</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="src/js/language.js"></script>
+    <script src="src/js/main.js"></script>
+    <script src="src/js/analytics.js"></script>
+</body>
+</html>

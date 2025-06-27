@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="police_infrastructure_title">Police - Infrastructure Health</title>
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/dashboard.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/emergency.css">
+    <link rel="stylesheet" href="src/css/rtl.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title" data-lang-key="police_infrastructure_title">Police - Infrastructure Health</h1>
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <button class="language-btn" id="languageToggle">
+                            <span id="currentLang">EN</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 12l-4-4h8l-4 4z"/>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown" id="languageDropdown">
+                            <button class="language-option" data-lang="en">English</button>
+                            <button class="language-option" data-lang="ar">العربية</button>
+                        </div>
+                    </div>
+                    <div class="current-time" id="currentTime"></div>
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'" data-lang-key="back_to_main">
+                        Back to Main Dashboard
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="service-nav">
+            <div class="nav-tabs">
+                <button class="nav-tab" onclick="window.location.href='police-traffic-lights.html'" data-lang-key="traffic_light_monitoring">Traffic Light Monitoring</button>
+                <button class="nav-tab" onclick="window.location.href='police-accidents.html'" data-lang-key="accident_management">Accident Management</button>
+                <button class="nav-tab active" onclick="window.location.href='police-infrastructure.html'" data-lang-key="infrastructure_health">Infrastructure Health</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="infrastructure-section">
+                <h2 data-lang-key="infrastructure_health">Infrastructure Health</h2>
+                
+                <!-- Camera Feeds -->
+                <div class="camera-section">
+                    <h3 data-lang-key="camera_feeds">Camera Feeds</h3>
+                    <div class="camera-grid">
+                        <div class="camera-feed">
+                            <div class="camera-header">
+                                <span class="camera-name">North Main Camera</span>
+                                <span class="camera-status online" data-lang-key="online">Online</span>
+                            </div>
+                            <div class="camera-display">
+                                <div class="camera-placeholder">
+                                    📹 Live Feed
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="camera-feed">
+                            <div class="camera-header">
+                                <span class="camera-name">South Main Camera</span>
+                                <span class="camera-status online" data-lang-key="online">Online</span>
+                            </div>
+                            <div class="camera-display">
+                                <div class="camera-placeholder">
+                                    📹 Live Feed
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="camera-feed">
+                            <div class="camera-header">
+                                <span class="camera-name">East Ave Camera</span>
+                                <span class="camera-status online" data-lang-key="online">Online</span>
+                            </div>
+                            <div class="camera-display">
+                                <div class="camera-placeholder">
+                                    📹 Live Feed
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="camera-feed">
+                            <div class="camera-header">
+                                <span class="camera-name">West Blvd Camera</span>
+                                <span class="camera-status online" data-lang-key="online">Online</span>
+                            </div>
+                            <div class="camera-display">
+                                <div class="camera-placeholder">
+                                    📹 Live Feed
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sensor Readings -->
+                <div class="sensors-section">
+                    <h3 data-lang-key="sensor_readings">Sensor Readings</h3>
+                    <div class="sensors-grid">
+                        <div class="sensor-card">
+                            <div class="sensor-header">
+                                <h4 data-lang-key="road_condition">Road Condition</h4>
+                                <span class="sensor-status good" data-lang-key="good">Good</span>
+                            </div>
+                            <div class="sensor-data">
+                                <div class="sensor-reading">
+                                    <span class="reading-label">Surface Quality:</span>
+                                    <span class="reading-value">92%</span>
+                                </div>
+                                <div class="sensor-reading">
+                                    <span class="reading-label">Grip Level:</span>
+                                    <span class="reading-value">88%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sensor-card">
+                            <div class="sensor-header">
+                                <h4>Crack Detection</h4>
+                                <span class="sensor-status warning" data-lang-key="crack_detected">Crack Detected</span>
+                            </div>
+                            <div class="sensor-data">
+                                <div class="sensor-reading">
+                                    <span class="reading-label">Severity:</span>
+                                    <span class="reading-value">Minor</span>
+                                </div>
+                                <div class="sensor-reading">
+                                    <span class="reading-label">Location:</span>
+                                    <span class="reading-value">East Ave</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sensor-card">
+                            <div class="sensor-header">
+                                <h4 data-lang-key="water_level">Water Level</h4>
+                                <span class="sensor-status normal" data-lang-key="normal">Normal</span>
+                            </div>
+                            <div class="sensor-data">
+                                <div class="sensor-reading">
+                                    <span class="reading-label">Drainage:</span>
+                                    <span class="reading-value">Clear</span>
+                                </div>
+                                <div class="sensor-reading">
+                                    <span class="reading-label">Flood Risk:</span>
+                                    <span class="reading-value">Low</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sensor-card">
+                            <div class="sensor-header">
+                                <h4>Traffic Flow</h4>
+                                <span class="sensor-status normal" data-lang-key="normal">Normal</span>
+                            </div>
+                            <div class="sensor-data">
+                                <div class="sensor-reading">
+                                    <span class="reading-label">Average Speed:</span>
+                                    <span class="reading-value">45 km/h</span>
+                                </div>
+                                <div class="sensor-reading">
+                                    <span class="reading-label">Congestion:</span>
+                                    <span class="reading-value">Low</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="src/js/language.js"></script>
+    <script src="src/js/main.js"></script>
+    <script src="src/js/police-infrastructure.js"></script>
+</body>
+</html>
