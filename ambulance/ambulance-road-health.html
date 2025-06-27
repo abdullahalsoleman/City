@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Health Monitoring - Ambulance Service</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/emergency.css">
+    <link rel="stylesheet" href="styles/police-pages.css">
+</head>
+<body>
+    <div class="dashboard ambulance-dashboard">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <div class="logo-icon">🚑</div>
+                        <div class="logo-text">
+                            <h1 data-en="Road Health Monitoring" data-ar="مراقبة صحة الطرق">Road Health Monitoring</h1>
+                            <p data-en="Emergency Route Management" data-ar="إدارة طرق الطوارئ">Emergency Route Management</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-item">
+                        <span class="icon">🕒</span>
+                        <span id="current-time">00:00:00</span>
+                    </div>
+                    
+                    <div class="header-item">
+                        <button id="lang-toggle" class="cds-button cds-button--tertiary">العربية</button>
+                    </div>
+                    
+                    <nav class="emergency-nav">
+                        <a href="ambulance.html" class="nav-btn ambulance" data-en="🏠 Main Dashboard" data-ar="🏠 لوحة التحكم الرئيسية">🏠 Main Dashboard</a>
+                        <a href="ambulance-accidents.html" class="nav-btn ambulance" data-en="🚨 Accidents" data-ar="🚨 الحوادث">🚨 Accidents</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="road-health-grid">
+                <div class="emergency-routes">
+                    <h2 class="text-heading-04" data-en="Emergency Route Status" data-ar="حالة طرق الطوارئ">Emergency Route Status</h2>
+                    <div class="route-cards">
+                        <div class="route-card clear">
+                            <h3 data-en="Hospital Route A" data-ar="طريق المستشفى أ">Hospital Route A</h3>
+                            <div class="route-status" data-en="Clear" data-ar="واضح">Clear</div>
+                            <div class="travel-time" data-en="Est. Time: 8 min" data-ar="الوقت المقدر: 8 دقائق">Est. Time: 8 min</div>
+                        </div>
+                        
+                        <div class="route-card blocked">
+                            <h3 data-en="Hospital Route B" data-ar="طريق المستشفى ب">Hospital Route B</h3>
+                            <div class="route-status" data-en="Blocked" data-ar="مسدود">Blocked</div>
+                            <div class="travel-time" data-en="Construction work" data-ar="أعمال إنشائية">Construction work</div>
+                        </div>
+                        
+                        <div class="route-card slow">
+                            <h3 data-en="Emergency Center Route" data-ar="طريق مركز الطوارئ">Emergency Center Route</h3>
+                            <div class="route-status" data-en="Slow Traffic" data-ar="حركة مرور بطيئة">Slow Traffic</div>
+                            <div class="travel-time" data-en="Est. Time: 15 min" data-ar="الوقت المقدر: 15 دقيقة">Est. Time: 15 min</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accessibility-monitoring">
+                    <h2 class="text-heading-04" data-en="Route Accessibility" data-ar="إمكانية الوصول للطرق">Route Accessibility</h2>
+                    <div class="accessibility-list">
+                        <div class="access-item good">
+                            <div class="access-icon">✅</div>
+                            <div class="access-details">
+                                <h3 data-en="Main Hospital Access" data-ar="الوصول للمستشفى الرئيسي">Main Hospital Access</h3>
+                                <p data-en="All lanes clear, ambulance priority lanes available" data-ar="جميع المسارات واضحة، مسارات أولوية الإسعاف متاحة">All lanes clear, ambulance priority lanes available</p>
+                            </div>
+                        </div>
+                        
+                        <div class="access-item warning">
+                            <div class="access-icon">⚠️</div>
+                            <div class="access-details">
+                                <h3 data-en="Bridge Clearance" data-ar="تصريح الجسر">Bridge Clearance</h3>
+                                <p data-en="Height restriction may affect larger ambulances" data-ar="قيود الارتفاع قد تؤثر على سيارات الإسعاف الأكبر">Height restriction may affect larger ambulances</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/ambulance-road-health.js"></script>
+</body>
+</html>

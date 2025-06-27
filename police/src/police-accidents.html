@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Management - Police Department</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/emergency.css">
+    <link rel="stylesheet" href="styles/police-pages.css">
+</head>
+<body>
+    <div class="dashboard police-dashboard">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <div class="logo-icon">🚨</div>
+                        <div class="logo-text">
+                            <h1 data-en="Accident Management" data-ar="إدارة الحوادث">Accident Management</h1>
+                            <p data-en="Emergency Response Center" data-ar="مركز الاستجابة للطوارئ">Emergency Response Center</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-item">
+                        <span class="icon">🕒</span>
+                        <span id="current-time">00:00:00</span>
+                    </div>
+                    
+                    <div class="header-item">
+                        <span class="icon">🔄</span>
+                        <span data-en="Auto-refresh: ON" data-ar="التحديث التلقائي: مفعل">Auto-refresh: ON</span>
+                    </div>
+                    
+                    <div class="header-item">
+                        <button id="lang-toggle" class="cds-button cds-button--tertiary">العربية</button>
+                    </div>
+                    
+                    <nav class="emergency-nav">
+                        <a href="police.html" class="nav-btn police" data-en="🏠 Main Dashboard" data-ar="🏠 لوحة التحكم الرئيسية">🏠 Main Dashboard</a>
+                        <a href="police-traffic-lights.html" class="nav-btn police" data-en="🚦 Traffic Lights" data-ar="🚦 إشارات المرور">🚦 Traffic Lights</a>
+                        <a href="police-infrastructure.html" class="nav-btn police" data-en="🏗️ Infrastructure" data-ar="🏗️ البنية التحتية">🏗️ Infrastructure</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="accident-controls">
+                <div class="status-summary">
+                    <div class="summary-card unresolved">
+                        <h3>Unresolved</h3>
+                        <span class="count" id="unresolved-count">2</span>
+                    </div>
+                    <div class="summary-card in-progress">
+                        <h3>In Progress</h3>
+                        <span class="count" id="in-progress-count">1</span>
+                    </div>
+                    <div class="summary-card resolved">
+                        <h3>Resolved</h3>
+                        <span class="count" id="resolved-count">3</span>
+                    </div>
+                </div>
+
+                <div class="audio-controls">
+                    <button class="cds-button cds-button--secondary" id="mute-alerts">🔊 Mute Alerts</button>
+                    <button class="cds-button cds-button--tertiary" id="test-audio">🎵 Test Audio</button>
+                </div>
+            </div>
+
+            <div class="accidents-list" id="accidents-list">
+                <div class="accident-card unresolved" data-status="unresolved" data-id="ACC-001">
+                    <div class="accident-header">
+                        <div class="accident-title">
+                            <h3 class="text-heading-03">Multi-Vehicle Collision</h3>
+                            <div class="status-badge unresolved">Unresolved</div>
+                        </div>
+                        <div class="accident-time">
+                            <span class="reported-time">Reported: 14:23</span>
+                            <span class="duration">Duration: 12min</span>
+                        </div>
+                    </div>
+
+                    <div class="accident-details">
+                        <div class="location-info">
+                            <span class="location-icon">📍</span>
+                            <span class="location-text">Main & 2nd Street - Southbound lane</span>
+                        </div>
+                        
+                        <div class="description">
+                            <p>Three-vehicle collision blocking two lanes. Multiple injuries reported. Emergency services requested on scene.</p>
+                        </div>
+
+                        <div class="severity-indicators">
+                            <div class="severity high">
+                                <span class="severity-label">Severity:</span>
+                                <span class="severity-value">High</span>
+                            </div>
+                            <div class="injuries">
+                                <span class="injury-label">Injuries:</span>
+                                <span class="injury-value">Multiple reported</span>
+                            </div>
+                            <div class="lanes-blocked">
+                                <span class="lanes-label">Lanes Blocked:</span>
+                                <span class="lanes-value">2 of 4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accident-actions">
+                        <button class="cds-button cds-button--primary" onclick="updateAccidentStatus('ACC-001', 'in-progress')">
+                            Mark In Progress
+                        </button>
+                        <button class="cds-button cds-button--secondary">
+                            Dispatch Unit
+                        </button>
+                        <button class="cds-button cds-button--tertiary">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <div class="accident-card in-progress" data-status="in-progress" data-id="ACC-002">
+                    <div class="accident-header">
+                        <div class="accident-title">
+                            <h3 class="text-heading-03">Vehicle Breakdown</h3>
+                            <div class="status-badge in-progress">In Progress</div>
+                        </div>
+                        <div class="accident-time">
+                            <span class="reported-time">Reported: 14:15</span>
+                            <span class="duration">Duration: 20min</span>
+                        </div>
+                    </div>
+
+                    <div class="accident-details">
+                        <div class="location-info">
+                            <span class="location-icon">📍</span>
+                            <span class="location-text">Oak & 1st Street - Right shoulder</span>
+                        </div>
+                        
+                        <div class="description">
+                            <p>Single vehicle mechanical failure. Vehicle blocking right lane. Tow truck dispatched. Unit P-103 on scene.</p>
+                        </div>
+
+                        <div class="severity-indicators">
+                            <div class="severity medium">
+                                <span class="severity-label">Severity:</span>
+                                <span class="severity-value">Medium</span>
+                            </div>
+                            <div class="injuries">
+                                <span class="injury-label">Injuries:</span>
+                                <span class="injury-value">None</span>
+                            </div>
+                            <div class="lanes-blocked">
+                                <span class="lanes-label">Lanes Blocked:</span>
+                                <span class="lanes-value">1 of 3</span>
+                            </div>
+                        </div>
+
+                        <div class="response-info">
+                            <div class="responding-unit">
+                                <span class="unit-label">Unit:</span>
+                                <span class="unit-value">P-103 (Officer Williams)</span>
+                            </div>
+                            <div class="eta">
+                                <span class="eta-label">Tow ETA:</span>
+                                <span class="eta-value">8 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accident-actions">
+                        <button class="cds-button cds-button--primary" onclick="updateAccidentStatus('ACC-002', 'resolved')">
+                            Mark Resolved
+                        </button>
+                        <button class="cds-button cds-button--secondary">
+                            Contact Unit
+                        </button>
+                        <button class="cds-button cds-button--tertiary">
+                            Update Status
+                        </button>
+                    </div>
+                </div>
+
+                <div class="accident-card unresolved new-accident" data-status="unresolved" data-id="ACC-003">
+                    <div class="accident-header">
+                        <div class="accident-title">
+                            <h3 class="text-heading-03">Pedestrian Incident</h3>
+                            <div class="status-badge unresolved">Unresolved</div>
+                            <div class="new-badge">NEW</div>
+                        </div>
+                        <div class="accident-time">
+                            <span class="reported-time">Reported: 14:35</span>
+                            <span class="duration">Duration: 2min</span>
+                        </div>
+                    </div>
+
+                    <div class="accident-details">
+                        <div class="location-info">
+                            <span class="location-icon">📍</span>
+                            <span class="location-text">Pine & 3rd Avenue - Crosswalk</span>
+                        </div>
+                        
+                        <div class="description">
+                            <p>Pedestrian struck by vehicle in crosswalk. Ambulance requested. Traffic backing up in all directions.</p>
+                        </div>
+
+                        <div class="severity-indicators">
+                            <div class="severity critical">
+                                <span class="severity-label">Severity:</span>
+                                <span class="severity-value">Critical</span>
+                            </div>
+                            <div class="injuries">
+                                <span class="injury-label">Injuries:</span>
+                                <span class="injury-value">Serious</span>
+                            </div>
+                            <div class="lanes-blocked">
+                                <span class="lanes-label">Intersection:</span>
+                                <span class="lanes-value">Fully blocked</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accident-actions">
+                        <button class="cds-button cds-button--primary urgent" onclick="updateAccidentStatus('ACC-003', 'in-progress')">
+                            🚨 Priority Response
+                        </button>
+                        <button class="cds-button cds-button--secondary">
+                            Dispatch All Units
+                        </button>
+                        <button class="cds-button cds-button--tertiary">
+                            Contact Medical
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resolved-section" id="resolved-section">
+                <h2 class="text-heading-04">Recently Resolved</h2>
+                <div class="resolved-list">
+                    <div class="accident-card resolved" data-status="resolved">
+                        <div class="accident-summary">
+                            <span class="accident-type">Minor Collision</span>
+                            <span class="accident-location">Main & 1st Street</span>
+                            <span class="resolved-time">Resolved: 13:45</span>
+                        </div>
+                    </div>
+                    
+                    <div class="accident-card resolved" data-status="resolved">
+                        <div class="accident-summary">
+                            <span class="accident-type">Traffic Violation</span>
+                            <span class="accident-location">Oak & 2nd Street</span>
+                            <span class="resolved-time">Resolved: 13:30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="alert-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYeBC2Pz/LNhS8FJoHO8diJMwgZY7v3m5Q5DRlq" type="audio/wav">
+    </audio>
+
+    <script src="js/main.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/police-accidents.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Management - Fire Department</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/emergency.css">
+    <link rel="stylesheet" href="styles/police-pages.css">
+</head>
+<body>
+    <div class="dashboard fire-dashboard">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <div class="logo-icon">🚨</div>
+                        <div class="logo-text">
+                            <h1 data-en="Fire Department Accidents" data-ar="حوادث إدارة الإطفاء">Fire Department Accidents</h1>
+                            <p data-en="Emergency Response Center" data-ar="مركز الاستجابة للطوارئ">Emergency Response Center</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-item">
+                        <span class="icon">🕒</span>
+                        <span id="current-time">00:00:00</span>
+                    </div>
+                    
+                    <div class="header-item">
+                        <button id="lang-toggle" class="cds-button cds-button--tertiary">العربية</button>
+                    </div>
+                    
+                    <nav class="emergency-nav">
+                        <a href="fire.html" class="nav-btn fire" data-en="🏠 Main Dashboard" data-ar="🏠 لوحة التحكم الرئيسية">🏠 Main Dashboard</a>
+                        <a href="fire-road-conditions.html" class="nav-btn fire" data-en="🛣️ Road Conditions" data-ar="🛣️ حالة الطرق">🛣️ Road Conditions</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="accident-controls">
+                <div class="status-summary">
+                    <div class="summary-card unresolved">
+                        <h3 data-en="Unresolved" data-ar="غير محلول">Unresolved</h3>
+                        <span class="count" id="unresolved-count">1</span>
+                    </div>
+                    <div class="summary-card in-progress">
+                        <h3 data-en="In Progress" data-ar="قيد التنفيذ">In Progress</h3>
+                        <span class="count" id="in-progress-count">2</span>
+                    </div>
+                    <div class="summary-card resolved">
+                        <h3 data-en="Resolved" data-ar="محلول">Resolved</h3>
+                        <span class="count" id="resolved-count">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accidents-list" id="fire-accidents-list">
+                <div class="accident-card unresolved" data-status="unresolved" data-id="FIRE-001">
+                    <div class="accident-header">
+                        <div class="accident-title">
+                            <h3 class="text-heading-03" data-en="Vehicle Fire" data-ar="حريق مركبة">Vehicle Fire</h3>
+                            <div class="status-badge unresolved" data-en="Unresolved" data-ar="غير محلول">Unresolved</div>
+                        </div>
+                        <div class="accident-time">
+                            <span class="reported-time" data-en="Reported: 14:45" data-ar="مبلغ عنه: 14:45">Reported: 14:45</span>
+                            <span class="duration" data-en="Duration: 5min" data-ar="المدة: 5 دقائق">Duration: 5min</span>
+                        </div>
+                    </div>
+
+                    <div class="accident-details">
+                        <div class="location-info">
+                            <span class="location-icon">📍</span>
+                            <span class="location-text" data-en="Highway 101 - Mile marker 15" data-ar="الطريق السريع 101 - علامة الميل 15">Highway 101 - Mile marker 15</span>
+                        </div>
+                        
+                        <div class="description">
+                            <p data-en="Car engine fire, spreading to nearby grass area. Driver evacuated safely." data-ar="حريق محرك السيارة، ينتشر إلى منطقة العشب المجاورة. تم إخلاء السائق بأمان.">Car engine fire, spreading to nearby grass area. Driver evacuated safely.</p>
+                        </div>
+
+                        <div class="severity-indicators">
+                            <div class="severity high">
+                                <span class="severity-label" data-en="Severity:" data-ar="الخطورة:">Severity:</span>
+                                <span class="severity-value" data-en="High" data-ar="عالي">High</span>
+                            </div>
+                            <div class="fire-risk">
+                                <span class="fire-label" data-en="Fire Risk:" data-ar="خطر الحريق:">Fire Risk:</span>
+                                <span class="fire-value" data-en="Spreading" data-ar="منتشر">Spreading</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accident-actions">
+                        <button class="cds-button cds-button--primary" onclick="updateFireAccidentStatus('FIRE-001', 'in-progress')" data-en="Deploy Fire Truck" data-ar="نشر سيارة الإطفاء">
+                            Deploy Fire Truck
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="fire-alert-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmYeBC2Pz/LNhS8FJoHO8diJMwgZY7v3m5Q5DRlq" type="audio/wav">
+    </audio>
+
+    <script src="js/main.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/fire-accidents.js"></script>
+</body>
+</html>
