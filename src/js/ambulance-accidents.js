@@ -4,6 +4,7 @@ class AmbulanceAccidents {
         this.accidents = [];
         this.alertAudio = document.getElementById('alertSound');
         this.speechSynthesis = window.speechSynthesis;
+        this.autoSimulationTimer = null;
         
         this.init();
     }
@@ -13,6 +14,90 @@ class AmbulanceAccidents {
         this.renderAccidents();
         this.startDataUpdates();
         this.checkForNewAccidents();
+        this.startAutoSimulation();
+    }
+
+
+
+    startAutoSimulation() {
+        // Start automatic simulation after 30 seconds
+        this.autoSimulationTimer = setTimeout(() => {
+            this.simulateNewAccident();
+            
+            // Continue simulating emergencies every 60-120 seconds
+            const scheduleNextSimulation = () => {
+                const nextSimulationTime = 60000 + Math.random() * 60000; // 60-120 seconds
+                setTimeout(() => {
+                    // Only simulate if there are no unresolved emergencies
+                    const unresolvedAccidents = this.accidents.filter(acc => acc.status === 'unresolved');
+                    if (unresolvedAccidents.length === 0) {
+                        this.simulateNewAccident();
+                    }
+                    scheduleNextSimulation();
+                }, nextSimulationTime);
+            };
+            
+            scheduleNextSimulation();
+        }, 30000); // 30 seconds initial delay
+    }
+
+    simulateNewAccident() {
+        const locations = [
+            'City General Hospital',
+            'Downtown Medical Center',
+            'Elderly Care Facility',
+            'Public Park - Jogging Trail',
+            'Office Building - 15th Floor',
+            'Residential Home - Maple Street',
+            'Shopping Mall - Food Court',
+            'University Campus - Library',
+            'Community Health Center',
+            'Senior Living Complex'
+        ];
+        
+        const descriptions = [
+            'Cardiac arrest - CPR in progress',
+            'Severe allergic reaction - anaphylaxis',
+            'Fall with suspected head injury',
+            'Respiratory distress - difficulty breathing',
+            'Stroke symptoms - facial drooping',
+            'Diabetic emergency - unconscious patient',
+            'Severe chest pain - possible heart attack',
+            'Seizure episode - patient unresponsive',
+            'Drug overdose - critical condition',
+            'Choking incident - airway obstruction'
+        ];
+        
+        const priorities = ['high', 'medium'];
+        const priorityWeights = [0.7, 0.3]; // 70% high, 30% medium - medical emergencies are typically urgent
+        
+        // Weighted random selection for priority
+        const randomPriority = Math.random();
+        let selectedPriority;
+        if (randomPriority < priorityWeights[0]) {
+            selectedPriority = priorities[0]; // high
+        } else {
+            selectedPriority = priorities[1]; // medium
+        }
+        
+        const newAccident = {
+            id: Date.now(),
+            location: locations[Math.floor(Math.random() * locations.length)],
+            description: descriptions[Math.floor(Math.random() * descriptions.length)],
+            status: 'unresolved',
+            priority: selectedPriority,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        
+        this.accidents.unshift(newAccident);
+        this.renderAccidents();
+        
+        // Start continuous alert for the new accident
+        if (window.audioManager) {
+            window.audioManager.startContinuousAlert(newAccident, 'ambulance');
+        }
+        
+        console.log('AUTO-SIMULATED: New medical emergency:', newAccident);
     }
 
     generateInitialAccidents() {
@@ -88,7 +173,11 @@ class AmbulanceAccidents {
         if (accident) {
             accident.status = 'in_progress';
             this.renderAccidents();
-            this.stopAlerts();
+            
+            // Stop continuous alerts when status changes to "In Progress"
+            if (window.audioManager) {
+                window.audioManager.stopContinuousAlert();
+            }
             
             // Update language if needed
             if (window.languageManager) {
@@ -103,6 +192,11 @@ class AmbulanceAccidents {
             accident.status = 'resolved';
             this.renderAccidents();
             
+            // Stop continuous alerts if any are active
+            if (window.audioManager) {
+                window.audioManager.stopContinuousAlert();
+            }
+            
             // Update language if needed
             if (window.languageManager) {
                 window.languageManager.updateTexts(window.languageManager.getCurrentLanguage());
@@ -111,24 +205,34 @@ class AmbulanceAccidents {
     }
 
     playAlert(accident) {
-        // Play alert sound
-        if (this.alertAudio) {
-            this.alertAudio.currentTime = 0;
-            this.alertAudio.play().catch(e => console.log('Audio play failed:', e));
-        }
-        
-        // Text-to-speech
-        const text = `Medical emergency reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}.`;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.8;
-        utterance.volume = 0.8;
-        
-        if (this.speechSynthesis) {
-            this.speechSynthesis.speak(utterance);
+        // Use the new continuous alert system instead of single alerts
+        if (window.audioManager) {
+            window.audioManager.startContinuousAlert(accident, 'ambulance');
+        } else {
+            // Fallback to original alert system if audioManager is not available
+            if (this.alertAudio) {
+                this.alertAudio.currentTime = 0;
+                this.alertAudio.play().catch(e => console.log('Audio play failed:', e));
+            }
+            
+            const text = `Medical emergency reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}.`;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.8;
+            utterance.volume = 0.8;
+            
+            if (this.speechSynthesis) {
+                this.speechSynthesis.speak(utterance);
+            }
         }
     }
 
     stopAlerts() {
+        // Stop continuous alerts
+        if (window.audioManager) {
+            window.audioManager.stopContinuousAlert();
+        }
+        
+        // Fallback cleanup
         if (this.alertAudio) {
             this.alertAudio.pause();
             this.alertAudio.currentTime = 0;
@@ -140,49 +244,11 @@ class AmbulanceAccidents {
     }
 
     checkForNewAccidents() {
-        // Simulate new medical emergencies
-        if (Math.random() < 0.015) { // 1.5% chance every update
-            const locations = [
-                'City Hospital Emergency',
-                'Community Health Center',
-                'Senior Living Facility',
-                'Shopping Center',
-                'Office Building Downtown'
-            ];
-            
-            const descriptions = [
-                'Chest pain - possible heart attack',
-                'Difficulty breathing - respiratory distress',
-                'Fall with potential fracture',
-                'Allergic reaction - severe',
-                'Stroke symptoms reported'
-            ];
-            
-            const newAccident = {
-                id: Date.now(),
-                location: locations[Math.floor(Math.random() * locations.length)],
-                description: descriptions[Math.floor(Math.random() * descriptions.length)],
-                status: 'unresolved',
-                priority: ['high', 'medium'][Math.floor(Math.random() * 2)], // Medical emergencies are typically high/medium priority
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            };
-            
-            this.accidents.unshift(newAccident);
-            this.renderAccidents();
-            
-            // Play alert for new accident
-            if (newAccident.status === 'unresolved') {
-                this.playAlert(newAccident);
-            }
-        }
+        // This method is kept for compatibility but auto-simulation handles new emergencies now
+        console.log('Manual emergency checking disabled - using auto-simulation system');
     }
 
     startDataUpdates() {
-        // Check for new emergencies every 15 seconds
-        setInterval(() => {
-            this.checkForNewAccidents();
-        }, 15000);
-        
         // Major data refresh every 30 seconds
         setInterval(() => {
             console.log('Ambulance Accidents: 30-second data refresh');

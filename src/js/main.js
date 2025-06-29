@@ -93,11 +93,15 @@ class AudioManager {
     constructor() {
         this.alertSound = null;
         this.speechSynthesis = window.speechSynthesis;
+        this.isAlertActive = false;
+        this.currentAlertInterval = null;
+        this.currentSoundInterval = null;
+        this.currentAccident = null;
         this.createAlertSound();
     }
 
     createAlertSound() {
-        // Create a simple beep sound using Web Audio API
+        // Create a more prominent alert sound using Web Audio API
         if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
             const AudioContextClass = AudioContext || webkitAudioContext;
             this.audioContext = new AudioContextClass();
@@ -118,6 +122,99 @@ class AudioManager {
             oscillator.start();
             oscillator.stop(this.audioContext.currentTime + 0.2);
         }
+    }
+
+    playLoudAlert() {
+        if (this.audioContext) {
+            // Create a louder, more attention-grabbing alert sound
+            const oscillator1 = this.audioContext.createOscillator();
+            const oscillator2 = this.audioContext.createOscillator();
+            const gainNode = this.audioContext.createGain();
+            
+            oscillator1.connect(gainNode);
+            oscillator2.connect(gainNode);
+            gainNode.connect(this.audioContext.destination);
+            
+            // Two-tone alert sound (like emergency sirens)
+            oscillator1.frequency.setValueAtTime(800, this.audioContext.currentTime);
+            oscillator2.frequency.setValueAtTime(1000, this.audioContext.currentTime);
+            
+            // Make it louder
+            gainNode.gain.setValueAtTime(0.6, this.audioContext.currentTime);
+            
+            oscillator1.start();
+            oscillator2.start();
+            oscillator1.stop(this.audioContext.currentTime + 0.5);
+            oscillator2.stop(this.audioContext.currentTime + 0.5);
+        }
+    }
+
+    startContinuousAlert(accident, serviceType = 'emergency') {
+        if (this.isAlertActive) {
+            this.stopContinuousAlert();
+        }
+
+        this.isAlertActive = true;
+        this.currentAccident = accident;
+
+        // Create the alert message based on service type
+        let alertMessage;
+        switch (serviceType) {
+            case 'police':
+                alertMessage = `ATTENTION: Traffic accident reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}. Police response required.`;
+                break;
+            case 'ambulance':
+                alertMessage = `ATTENTION: Medical emergency at ${accident.location}. ${accident.description}. Priority: ${accident.priority}. Ambulance response required.`;
+                break;
+            case 'fire':
+                alertMessage = `ATTENTION: Fire emergency at ${accident.location}. ${accident.description}. Priority: ${accident.priority}. Fire department response required.`;
+                break;
+            default:
+                alertMessage = `ATTENTION: Emergency reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}.`;
+        }
+
+        // Play initial alert sound and speech
+        this.playLoudAlert();
+        setTimeout(() => {
+            this.speak(alertMessage, { rate: 0.9, volume: 1.0, pitch: 1.1 });
+        }, 1000);
+
+        // Set up continuous sound alerts (every 3 seconds)
+        this.currentSoundInterval = setInterval(() => {
+            if (this.isAlertActive) {
+                this.playLoudAlert();
+            }
+        }, 3000);
+
+        // Set up repeated speech alerts (every 15 seconds)
+        this.currentAlertInterval = setInterval(() => {
+            if (this.isAlertActive) {
+                this.speak(alertMessage, { rate: 0.9, volume: 1.0, pitch: 1.1 });
+            }
+        }, 15000);
+
+        console.log(`Continuous alert started for ${serviceType} accident:`, accident);
+    }
+
+    stopContinuousAlert() {
+        this.isAlertActive = false;
+        this.currentAccident = null;
+
+        // Clear intervals
+        if (this.currentAlertInterval) {
+            clearInterval(this.currentAlertInterval);
+            this.currentAlertInterval = null;
+        }
+
+        if (this.currentSoundInterval) {
+            clearInterval(this.currentSoundInterval);
+            this.currentSoundInterval = null;
+        }
+
+        // Stop speech synthesis
+        this.stopSpeech();
+        
+        console.log('Continuous alert stopped');
     }
 
     speak(text, options = {}) {

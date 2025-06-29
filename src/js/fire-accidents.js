@@ -4,6 +4,7 @@ class FireAccidents {
         this.accidents = [];
         this.alertAudio = document.getElementById('alertSound');
         this.speechSynthesis = window.speechSynthesis;
+        this.autoSimulationTimer = null;
         
         this.init();
     }
@@ -13,6 +14,90 @@ class FireAccidents {
         this.renderAccidents();
         this.startDataUpdates();
         this.checkForNewAccidents();
+        this.startAutoSimulation();
+    }
+
+
+
+    startAutoSimulation() {
+        // Start automatic simulation after 30 seconds
+        this.autoSimulationTimer = setTimeout(() => {
+            this.simulateNewAccident();
+            
+            // Continue simulating fire emergencies every 75-150 seconds
+            const scheduleNextSimulation = () => {
+                const nextSimulationTime = 75000 + Math.random() * 75000; // 75-150 seconds
+                setTimeout(() => {
+                    // Only simulate if there are no unresolved fire emergencies
+                    const unresolvedAccidents = this.accidents.filter(acc => acc.status === 'unresolved');
+                    if (unresolvedAccidents.length === 0) {
+                        this.simulateNewAccident();
+                    }
+                    scheduleNextSimulation();
+                }, nextSimulationTime);
+            };
+            
+            scheduleNextSimulation();
+        }, 30000); // 30 seconds initial delay
+    }
+
+    simulateNewAccident() {
+        const locations = [
+            'Apartment Complex - Building A',
+            'Industrial Warehouse District',
+            'Downtown Office Tower',
+            'Residential House - Oak Street',
+            'Chemical Manufacturing Plant',
+            'Shopping Mall - West Wing',
+            'Forest Area - Pine Ridge',
+            'School Building - Gymnasium',
+            'Hospital Parking Garage',
+            'Municipal Building - City Hall'
+        ];
+        
+        const descriptions = [
+            'Structure fire with heavy smoke and flames',
+            'Electrical fire spreading rapidly',
+            'Gas leak with potential explosion risk',
+            'Kitchen fire spreading to adjacent rooms',
+            'Chemical fire - hazardous materials involved',
+            'Smoke detected in ventilation system',
+            'Wildfire approaching residential area',
+            'Vehicle fire in parking garage',
+            'Propane tank explosion reported',
+            'Electrical transformer fire'
+        ];
+        
+        const priorities = ['high', 'medium'];
+        const priorityWeights = [0.8, 0.2]; // 80% high, 20% medium - fire emergencies are typically high priority
+        
+        // Weighted random selection for priority
+        const randomPriority = Math.random();
+        let selectedPriority;
+        if (randomPriority < priorityWeights[0]) {
+            selectedPriority = priorities[0]; // high
+        } else {
+            selectedPriority = priorities[1]; // medium
+        }
+        
+        const newAccident = {
+            id: Date.now(),
+            location: locations[Math.floor(Math.random() * locations.length)],
+            description: descriptions[Math.floor(Math.random() * descriptions.length)],
+            status: 'unresolved',
+            priority: selectedPriority,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        
+        this.accidents.unshift(newAccident);
+        this.renderAccidents();
+        
+        // Start continuous alert for the new accident
+        if (window.audioManager) {
+            window.audioManager.startContinuousAlert(newAccident, 'fire');
+        }
+        
+        console.log('AUTO-SIMULATED: New fire emergency:', newAccident);
     }
 
     generateInitialAccidents() {
@@ -88,7 +173,11 @@ class FireAccidents {
         if (accident) {
             accident.status = 'in_progress';
             this.renderAccidents();
-            this.stopAlerts();
+            
+            // Stop continuous alerts when status changes to "In Progress"
+            if (window.audioManager) {
+                window.audioManager.stopContinuousAlert();
+            }
             
             // Update language if needed
             if (window.languageManager) {
@@ -103,6 +192,11 @@ class FireAccidents {
             accident.status = 'resolved';
             this.renderAccidents();
             
+            // Stop continuous alerts if any are active
+            if (window.audioManager) {
+                window.audioManager.stopContinuousAlert();
+            }
+            
             // Update language if needed
             if (window.languageManager) {
                 window.languageManager.updateTexts(window.languageManager.getCurrentLanguage());
@@ -111,24 +205,34 @@ class FireAccidents {
     }
 
     playAlert(accident) {
-        // Play alert sound
-        if (this.alertAudio) {
-            this.alertAudio.currentTime = 0;
-            this.alertAudio.play().catch(e => console.log('Audio play failed:', e));
-        }
-        
-        // Text-to-speech
-        const text = `Fire emergency reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}.`;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.8;
-        utterance.volume = 0.8;
-        
-        if (this.speechSynthesis) {
-            this.speechSynthesis.speak(utterance);
+        // Use the new continuous alert system instead of single alerts
+        if (window.audioManager) {
+            window.audioManager.startContinuousAlert(accident, 'fire');
+        } else {
+            // Fallback to original alert system if audioManager is not available
+            if (this.alertAudio) {
+                this.alertAudio.currentTime = 0;
+                this.alertAudio.play().catch(e => console.log('Audio play failed:', e));
+            }
+            
+            const text = `Fire emergency reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}.`;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.8;
+            utterance.volume = 0.8;
+            
+            if (this.speechSynthesis) {
+                this.speechSynthesis.speak(utterance);
+            }
         }
     }
 
     stopAlerts() {
+        // Stop continuous alerts
+        if (window.audioManager) {
+            window.audioManager.stopContinuousAlert();
+        }
+        
+        // Fallback cleanup
         if (this.alertAudio) {
             this.alertAudio.pause();
             this.alertAudio.currentTime = 0;
@@ -140,49 +244,11 @@ class FireAccidents {
     }
 
     checkForNewAccidents() {
-        // Simulate new fire incidents
-        if (Math.random() < 0.008) { // 0.8% chance every update
-            const locations = [
-                'Commercial Building - Electrical Fire',
-                'Apartment Complex - Gas Leak',
-                'Forest Area - Wildfire',
-                'Chemical Plant - Explosion',
-                'Traffic Accident - Vehicle Fire'
-            ];
-            
-            const descriptions = [
-                'Electrical fire on the third floor, smoke and flames visible',
-                'Gas leak reported, potential for explosion',
-                'Wildfire spreading rapidly, evacuate nearby areas',
-                'Explosion at chemical plant, hazardous materials involved',
-                'Vehicle fire after traffic accident, injuries reported'
-            ];
-            
-            const newAccident = {
-                id: Date.now(),
-                location: locations[Math.floor(Math.random() * locations.length)],
-                description: descriptions[Math.floor(Math.random() * descriptions.length)],
-                status: 'unresolved',
-                priority: ['high', 'medium'][Math.floor(Math.random() * 2)],
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            };
-            
-            this.accidents.unshift(newAccident);
-            this.renderAccidents();
-            
-            // Play alert for new accident
-            if (newAccident.status === 'unresolved') {
-                this.playAlert(newAccident);
-            }
-        }
+        // This method is kept for compatibility but auto-simulation handles new fire emergencies now
+        console.log('Manual fire emergency checking disabled - using auto-simulation system');
     }
 
     startDataUpdates() {
-        // Check for new accidents every 15 seconds
-        setInterval(() => {
-            this.checkForNewAccidents();
-        }, 15000);
-        
         // Major data refresh every 30 seconds
         setInterval(() => {
             console.log('Fire Accidents: 30-second data refresh');

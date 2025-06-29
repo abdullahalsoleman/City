@@ -4,6 +4,7 @@ class PoliceAccidents {
         this.accidents = [];
         this.alertAudio = document.getElementById('alertSound');
         this.speechSynthesis = window.speechSynthesis;
+        this.autoSimulationTimer = null;
         
         this.init();
     }
@@ -13,6 +14,92 @@ class PoliceAccidents {
         this.renderAccidents();
         this.startDataUpdates();
         this.checkForNewAccidents();
+        this.startAutoSimulation();
+    }
+
+
+
+    startAutoSimulation() {
+        // Start automatic simulation after 30 seconds
+        this.autoSimulationTimer = setTimeout(() => {
+            this.simulateNewAccident();
+            
+            // Continue simulating accidents every 45-90 seconds
+            const scheduleNextSimulation = () => {
+                const nextSimulationTime = 45000 + Math.random() * 45000; // 45-90 seconds
+                setTimeout(() => {
+                    // Only simulate if there are no unresolved accidents
+                    const unresolvedAccidents = this.accidents.filter(acc => acc.status === 'unresolved');
+                    if (unresolvedAccidents.length === 0) {
+                        this.simulateNewAccident();
+                    }
+                    scheduleNextSimulation();
+                }, nextSimulationTime);
+            };
+            
+            scheduleNextSimulation();
+        }, 30000); // 30 seconds initial delay
+    }
+
+    simulateNewAccident() {
+        const locations = [
+            'Main Street & Oak Avenue',
+            'Highway 101 Southbound',
+            'Downtown Business District',
+            'School Zone - Maple Elementary',
+            'Shopping Center Parking Lot',
+            'Industrial District - Factory Road',
+            'Residential Area - Pine Street',
+            'City Center - Traffic Circle',
+            'Bridge Overpass - Route 66',
+            'Hospital Emergency Access'
+        ];
+        
+        const descriptions = [
+            'Multi-vehicle collision blocking traffic lanes',
+            'Vehicle rollover with potential injuries',
+            'Pedestrian accident at crosswalk',
+            'Head-on collision between two vehicles',
+            'Vehicle vs bicycle accident',
+            'Single vehicle collision with barriers',
+            'Rear-end collision with multiple vehicles',
+            'Vehicle struck utility pole',
+            'Debris on roadway causing accidents',
+            'Emergency vehicle collision'
+        ];
+        
+        const priorities = ['high', 'medium', 'low'];
+        const priorityWeights = [0.4, 0.4, 0.2]; // 40% high, 40% medium, 20% low
+        
+        // Weighted random selection for priority
+        const randomPriority = Math.random();
+        let selectedPriority;
+        if (randomPriority < priorityWeights[0]) {
+            selectedPriority = priorities[0]; // high
+        } else if (randomPriority < priorityWeights[0] + priorityWeights[1]) {
+            selectedPriority = priorities[1]; // medium
+        } else {
+            selectedPriority = priorities[2]; // low
+        }
+        
+        const newAccident = {
+            id: Date.now(),
+            location: locations[Math.floor(Math.random() * locations.length)],
+            description: descriptions[Math.floor(Math.random() * descriptions.length)],
+            status: 'unresolved',
+            priority: selectedPriority,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        
+        this.accidents.unshift(newAccident);
+        this.renderAccidents();
+        
+        // Start continuous alert for the new accident
+        if (window.audioManager) {
+            window.audioManager.startContinuousAlert(newAccident, 'police');
+        }
+        
+        console.log('AUTO-SIMULATED: New traffic accident:', newAccident);
     }
 
     generateInitialAccidents() {
@@ -88,7 +175,19 @@ class PoliceAccidents {
         if (accident) {
             accident.status = 'in_progress';
             this.renderAccidents();
-            this.stopAlerts();
+            
+            // Stop continuous alerts when status changes to "In Progress"
+            if (window.audioManager) {
+                window.audioManager.stopContinuousAlert();
+            }
+            
+            // Reset countdown display
+            const countdownTimer = document.getElementById('countdownTimer');
+            if (countdownTimer) {
+                countdownTimer.textContent = 'Standby...';
+                countdownTimer.style.color = '#2ed573';
+                countdownTimer.style.fontWeight = 'normal';
+            }
             
             // Update language if needed
             if (window.languageManager) {
@@ -103,6 +202,11 @@ class PoliceAccidents {
             accident.status = 'resolved';
             this.renderAccidents();
             
+            // Stop continuous alerts if any are active
+            if (window.audioManager) {
+                window.audioManager.stopContinuousAlert();
+            }
+            
             // Update language if needed
             if (window.languageManager) {
                 window.languageManager.updateTexts(window.languageManager.getCurrentLanguage());
@@ -111,24 +215,34 @@ class PoliceAccidents {
     }
 
     playAlert(accident) {
-        // Play alert sound
-        if (this.alertAudio) {
-            this.alertAudio.currentTime = 0;
-            this.alertAudio.play().catch(e => console.log('Audio play failed:', e));
-        }
-        
-        // Text-to-speech
-        const text = `Traffic accident reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}.`;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.8;
-        utterance.volume = 0.8;
-        
-        if (this.speechSynthesis) {
-            this.speechSynthesis.speak(utterance);
+        // Use the new continuous alert system instead of single alerts
+        if (window.audioManager) {
+            window.audioManager.startContinuousAlert(accident, 'police');
+        } else {
+            // Fallback to original alert system if audioManager is not available
+            if (this.alertAudio) {
+                this.alertAudio.currentTime = 0;
+                this.alertAudio.play().catch(e => console.log('Audio play failed:', e));
+            }
+            
+            const text = `Traffic accident reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}.`;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.8;
+            utterance.volume = 0.8;
+            
+            if (this.speechSynthesis) {
+                this.speechSynthesis.speak(utterance);
+            }
         }
     }
 
     stopAlerts() {
+        // Stop continuous alerts
+        if (window.audioManager) {
+            window.audioManager.stopContinuousAlert();
+        }
+        
+        // Fallback cleanup
         if (this.alertAudio) {
             this.alertAudio.pause();
             this.alertAudio.currentTime = 0;
@@ -140,49 +254,11 @@ class PoliceAccidents {
     }
 
     checkForNewAccidents() {
-        // Simulate new accidents
-        if (Math.random() < 0.01) { // 1% chance every update
-            const locations = [
-                'Downtown Intersection',
-                'Highway On-ramp',
-                'Shopping Center Parking',
-                'School Zone',
-                'Industrial District'
-            ];
-            
-            const descriptions = [
-                'Minor fender-bender causing delays',
-                'Vehicle stalled in traffic lane',
-                'Multi-vehicle collision',
-                'Pedestrian incident reported',
-                'Road debris blocking traffic'
-            ];
-            
-            const newAccident = {
-                id: Date.now(),
-                location: locations[Math.floor(Math.random() * locations.length)],
-                description: descriptions[Math.floor(Math.random() * descriptions.length)],
-                status: 'unresolved',
-                priority: ['high', 'medium', 'low'][Math.floor(Math.random() * 3)],
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            };
-            
-            this.accidents.unshift(newAccident);
-            this.renderAccidents();
-            
-            // Play alert for new accident
-            if (newAccident.status === 'unresolved') {
-                this.playAlert(newAccident);
-            }
-        }
+        // This method is kept for compatibility but auto-simulation handles new accidents now
+        console.log('Manual accident checking disabled - using auto-simulation system');
     }
 
     startDataUpdates() {
-        // Check for new accidents every 15 seconds
-        setInterval(() => {
-            this.checkForNewAccidents();
-        }, 15000);
-        
         // Major data refresh every 30 seconds
         setInterval(() => {
             console.log('Police Accidents: 30-second data refresh');
