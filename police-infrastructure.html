@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="police_infrastructure_title">Police - Infrastructure Health</title>
+    <title>الشرطة - صحة البنية التحتية</title>
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="stylesheet" href="src/css/dashboard.css">
     <link rel="stylesheet" href="src/css/components.css">
@@ -16,29 +16,10 @@
         <!-- Header -->
         <header class="header">
             <div class="header-content">
-                <h1 class="header-title" data-lang-key="police_infrastructure_title">Police - Infrastructure Health</h1>
+                <h1 class="header-title">الشرطة - صحة البنية التحتية</h1>
                 <div class="header-actions">
-                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
                     <div class="current-time" id="currentTime"></div>
-                    <div class="status-indicator">
-                        <span class="status-dot online"></span>
-                        <span class="status-text" data-lang-key="system_online">System Online</span>
-                    </div>
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">العودة إلى اللوحة الرئيسية</button>
                 </div>
             </div>
         </header>
@@ -46,25 +27,23 @@
         <!-- Navigation -->
         <nav class="service-nav">
             <div class="nav-tabs">
-                <button class="nav-tab" onclick="window.location.href='police-traffic-lights.html'" data-lang-key="traffic_light_monitoring">Traffic Light Monitoring</button>
-                <button class="nav-tab" onclick="window.location.href='police-accidents.html'" data-lang-key="accident_management">Accident Management</button>
-                <button class="nav-tab active" onclick="window.location.href='police-infrastructure.html'" data-lang-key="infrastructure_health">Infrastructure Health</button>
+                <button class="nav-tab" onclick="window.location.href='police-traffic-lights.html'">مراقبة إشارات المرور</button>
+                <button class="nav-tab" onclick="window.location.href='police-accidents.html'">إدارة الحوادث</button>
+                <button class="nav-tab active" onclick="window.location.href='police-infrastructure.html'">صحة البنية التحتية</button>
             </div>
         </nav>
 
         <!-- Main Content -->
         <main class="main-content">
             <section class="infrastructure-section">
-                <h2 data-lang-key="infrastructure_health">Infrastructure Health</h2>
-
                 <!-- Camera Feeds Section -->
                 <div class="camera-section">
-                    <h3 data-lang-key="camera_feeds">Camera Feeds</h3>
+                    <h3>كاميرات المراقبة</h3>
                     <div class="camera-grid">
                         <div class="camera-card">
                             <div class="camera-header">
-                                <span class="camera-name">North Main Camera</span>
-                                <span class="status-badge online">Online</span>
+                                <span class="camera-name">كاميرا الشمال الرئيسية</span>
+                                <span class="status-badge online">متصل</span>
                             </div>
                             <div class="camera-display">
                                 <div class="camera-placeholder">
@@ -72,15 +51,15 @@
                                         <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                                         <circle cx="12" cy="13" r="3"/>
                                     </svg>
-                                    <span>Live Feed</span>
+                                    <span>بث مباشر</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="camera-card">
                             <div class="camera-header">
-                                <span class="camera-name">South Main Camera</span>
-                                <span class="status-badge online">Online</span>
+                                <span class="camera-name">كاميرا الجنوب الرئيسية</span>
+                                <span class="status-badge online">متصل</span>
                             </div>
                             <div class="camera-display">
                                 <div class="camera-placeholder">
@@ -88,15 +67,15 @@
                                         <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                                         <circle cx="12" cy="13" r="3"/>
                                     </svg>
-                                    <span>Live Feed</span>
+                                    <span>بث مباشر</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="camera-card">
                             <div class="camera-header">
-                                <span class="camera-name">East Ave Camera</span>
-                                <span class="status-badge online">Online</span>
+                                <span class="camera-name">كاميرا الشارع الشرقي</span>
+                                <span class="status-badge online">متصل</span>
                             </div>
                             <div class="camera-display">
                                 <div class="camera-placeholder">
@@ -104,15 +83,15 @@
                                         <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                                         <circle cx="12" cy="13" r="3"/>
                                     </svg>
-                                    <span>Live Feed</span>
+                                    <span>بث مباشر</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="camera-card">
                             <div class="camera-header">
-                                <span class="camera-name">West Blvd Camera</span>
-                                <span class="status-badge online">Online</span>
+                                <span class="camera-name">كاميرا الشارع الغربي</span>
+                                <span class="status-badge online">متصل</span>
                             </div>
                             <div class="camera-display">
                                 <div class="camera-placeholder">
@@ -120,7 +99,7 @@
                                         <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                                         <circle cx="12" cy="13" r="3"/>
                                     </svg>
-                                    <span>Live Feed</span>
+                                    <span>بث مباشر</span>
                                 </div>
                             </div>
                         </div>
@@ -129,20 +108,20 @@
 
                 <!-- Sensor Readings Section -->
                 <div class="sensors-section">
-                    <h3 data-lang-key="sensor_readings">Sensor Readings</h3>
+                    <h3>قراءات المستشعرات</h3>
                     <div class="sensors-grid">
                         <div class="sensor-card">
                             <div class="sensor-header">
-                                <h4>Road Condition</h4>
-                                <span class="status-badge good">Good</span>
+                                <h4>حالة الطريق</h4>
+                                <span class="status-badge good">جيد</span>
                             </div>
                             <div class="sensor-data">
                                 <div class="sensor-reading">
-                                    <span class="reading-label">Surface Quality:</span>
+                                    <span class="reading-label">جودة السطح:</span>
                                     <span class="reading-value">92%</span>
                                 </div>
                                 <div class="sensor-reading">
-                                    <span class="reading-label">Grip Level:</span>
+                                    <span class="reading-label">مستوى التماسك:</span>
                                     <span class="reading-value">88%</span>
                                 </div>
                             </div>
@@ -150,51 +129,51 @@
 
                         <div class="sensor-card">
                             <div class="sensor-header">
-                                <h4>Crack Detection</h4>
-                                <span class="status-badge warning">Crack Detected</span>
+                                <h4>كشف التشققات</h4>
+                                <span class="status-badge warning">تم اكتشاف تشقق</span>
                             </div>
                             <div class="sensor-data">
                                 <div class="sensor-reading">
-                                    <span class="reading-label">Severity:</span>
-                                    <span class="reading-value">Minor</span>
+                                    <span class="reading-label">الخطورة:</span>
+                                    <span class="reading-value">بسيط</span>
                                 </div>
                                 <div class="sensor-reading">
-                                    <span class="reading-label">Location:</span>
-                                    <span class="reading-value">East Ave</span>
+                                    <span class="reading-label">الموقع:</span>
+                                    <span class="reading-value">الشارع الشرقي</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="sensor-card">
                             <div class="sensor-header">
-                                <h4>Water Level</h4>
-                                <span class="status-badge normal">Normal</span>
+                                <h4>مستوى المياه</h4>
+                                <span class="status-badge normal">طبيعي</span>
                             </div>
                             <div class="sensor-data">
                                 <div class="sensor-reading">
-                                    <span class="reading-label">Drainage:</span>
-                                    <span class="reading-value">Clear</span>
+                                    <span class="reading-label">الصرف:</span>
+                                    <span class="reading-value">نظيف</span>
                                 </div>
                                 <div class="sensor-reading">
-                                    <span class="reading-label">Flood Risk:</span>
-                                    <span class="reading-value">Low</span>
+                                    <span class="reading-label">خطر الفيضان:</span>
+                                    <span class="reading-value">منخفض</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="sensor-card">
                             <div class="sensor-header">
-                                <h4>Traffic Flow</h4>
-                                <span class="status-badge normal">Normal</span>
+                                <h4>تدفق المرور</h4>
+                                <span class="status-badge normal">طبيعي</span>
                             </div>
                             <div class="sensor-data">
                                 <div class="sensor-reading">
-                                    <span class="reading-label">Average Speed:</span>
-                                    <span class="reading-value">45 km/h</span>
+                                    <span class="reading-label">متوسط السرعة:</span>
+                                    <span class="reading-value">45 كم/س</span>
                                 </div>
                                 <div class="sensor-reading">
-                                    <span class="reading-label">Congestion:</span>
-                                    <span class="reading-value">Low</span>
+                                    <span class="reading-label">الازدحام:</span>
+                                    <span class="reading-value">منخفض</span>
                                 </div>
                             </div>
                         </div>
@@ -203,28 +182,28 @@
 
                 <!-- AI Processing Section -->
                 <div class="ai-section">
-                    <h3 data-lang-key="ai_processing">AI Computer Vision Processing</h3>
+                    <h3>معالجة الرؤية الحاسوبية بالذكاء الاصطناعي</h3>
                     <div class="ai-processing-grid">
                         <div class="ai-card">
                             <div class="ai-header">
-                                <h4>Object Detection (YOLO v5)</h4>
-                                <span class="status-badge online">Active</span>
+                                <h4>كشف الأجسام (YOLO v5)</h4>
+                                <span class="status-badge online">نشط</span>
                             </div>
                             <div class="ai-data">
                                 <div class="ai-metric">
-                                    <span class="metric-label">Vehicles Detected:</span>
+                                    <span class="metric-label">المركبات المكتشفة:</span>
                                     <span class="metric-value" id="vehicles-detected">247</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Pedestrians:</span>
+                                    <span class="metric-label">المشاة:</span>
                                     <span class="metric-value" id="pedestrians-detected">18</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Processing Speed:</span>
-                                    <span class="metric-value">45 FPS</span>
+                                    <span class="metric-label">سرعة المعالجة:</span>
+                                    <span class="metric-value">45 إطار/ثانية</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Accuracy:</span>
+                                    <span class="metric-label">الدقة:</span>
                                     <span class="metric-value">94.2%</span>
                                 </div>
                             </div>
@@ -232,24 +211,24 @@
 
                         <div class="ai-card">
                             <div class="ai-header">
-                                <h4>Traffic Analysis Engine</h4>
-                                <span class="status-badge online">Processing</span>
+                                <h4>محرك تحليل المرور</h4>
+                                <span class="status-badge online">قيد المعالجة</span>
                             </div>
                             <div class="ai-data">
                                 <div class="ai-metric">
-                                    <span class="metric-label">Queue Length Analysis:</span>
-                                    <span class="metric-value">Real-time</span>
+                                    <span class="metric-label">تحليل طول الطابور:</span>
+                                    <span class="metric-value">مباشر</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Congestion Prediction:</span>
-                                    <span class="metric-value">85% Accuracy</span>
+                                    <span class="metric-label">توقع الازدحام:</span>
+                                    <span class="metric-value">دقة 85%</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Signal Optimizations:</span>
+                                    <span class="metric-label">تحسينات الإشارة:</span>
                                     <span class="metric-value" id="optimizations-count">142</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Wait Time Reduction:</span>
+                                    <span class="metric-label">تخفيض وقت الانتظار:</span>
                                     <span class="metric-value">23%</span>
                                 </div>
                             </div>
@@ -257,24 +236,24 @@
 
                         <div class="ai-card">
                             <div class="ai-header">
-                                <h4>Incident Detection AI</h4>
-                                <span class="status-badge online">Monitoring</span>
+                                <h4>كشف الحوادث بالذكاء الاصطناعي</h4>
+                                <span class="status-badge online">قيد المراقبة</span>
                             </div>
                             <div class="ai-data">
                                 <div class="ai-metric">
-                                    <span class="metric-label">Accident Detection:</span>
-                                    <span class="metric-value">0.8s Response</span>
+                                    <span class="metric-label">كشف الحوادث:</span>
+                                    <span class="metric-value">0.8 ثانية استجابة</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Anomaly Detection:</span>
-                                    <span class="metric-value">Active</span>
+                                    <span class="metric-label">كشف الشذوذ:</span>
+                                    <span class="metric-value">نشط</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Emergency Alerts:</span>
-                                    <span class="metric-value" id="emergency-alerts">3 Today</span>
+                                    <span class="metric-label">تنبيهات الطوارئ:</span>
+                                    <span class="metric-value" id="emergency-alerts">3 اليوم</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">False Positive Rate:</span>
+                                    <span class="metric-label">معدل الإنذارات الكاذبة:</span>
                                     <span class="metric-value">2.1%</span>
                                 </div>
                             </div>
@@ -282,24 +261,24 @@
 
                         <div class="ai-card">
                             <div class="ai-header">
-                                <h4>Reinforcement Learning</h4>
-                                <span class="status-badge online">Learning</span>
+                                <h4>التعلم المعزز</h4>
+                                <span class="status-badge online">قيد التعلم</span>
                             </div>
                             <div class="ai-data">
                                 <div class="ai-metric">
-                                    <span class="metric-label">Model Training:</span>
-                                    <span class="metric-value">Continuous</span>
+                                    <span class="metric-label">تدريب النموذج:</span>
+                                    <span class="metric-value">مستمر</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Data Points/Hour:</span>
-                                    <span class="metric-value">12.5K</span>
+                                    <span class="metric-label">نقاط البيانات/ساعة:</span>
+                                    <span class="metric-value">12.5 ألف</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Improvement Rate:</span>
-                                    <span class="metric-value">+0.3% Daily</span>
+                                    <span class="metric-label">معدل التحسن:</span>
+                                    <span class="metric-value">+0.3% يومياً</span>
                                 </div>
                                 <div class="ai-metric">
-                                    <span class="metric-label">Model Version:</span>
+                                    <span class="metric-label">إصدار النموذج:</span>
                                     <span class="metric-value">v2.4.1</span>
                                 </div>
                             </div>
@@ -310,7 +289,8 @@
         </main>
     </div>
 
-    <script src="src/js/language.js"></script>
+    <audio id="alertSound" src="src/sounds/alert.mp3" preload="auto"></audio>
+
     <script src="src/js/main.js"></script>
     <script src="src/js/police-infrastructure.js"></script>
 </body>

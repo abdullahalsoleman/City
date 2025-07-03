@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="fire_road_condition_title">Fire Department - Road Condition Dashboard</title>
+    <title>الإطفاء - لوحة حالة الطرق</title>
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="stylesheet" href="src/css/dashboard.css">
     <link rel="stylesheet" href="src/css/components.css">
@@ -16,23 +16,11 @@
         <!-- Header -->
         <header class="header">
             <div class="header-content">
-                <h1 class="header-title" data-lang-key="fire_road_condition_title">Fire Department - Road Condition Dashboard</h1>
+                <h1 class="header-title">الإطفاء - لوحة حالة الطرق</h1>
                 <div class="header-actions">
-                    <div class="language-selector">
-                        <button class="language-btn" id="languageToggle">
-                            <span id="currentLang">EN</span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M8 12l-4-4h8l-4 4z"/>
-                            </svg>
-                        </button>
-                        <div class="language-dropdown" id="languageDropdown">
-                            <button class="language-option" data-lang="en">English</button>
-                            <button class="language-option" data-lang="ar">العربية</button>
-                        </div>
-                    </div>
                     <div class="current-time" id="currentTime"></div>
-                    <button class="btn btn-secondary" onclick="window.location.href='index.html'" data-lang-key="back_to_main">
-                        Back to Main Dashboard
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+                        العودة إلى اللوحة الرئيسية
                     </button>
                 </div>
             </div>
@@ -41,79 +29,78 @@
         <!-- Navigation -->
         <nav class="service-nav">
             <div class="nav-tabs">
-                <button class="nav-tab active" onclick="window.location.href='fire-road-condition.html'" data-lang-key="road_condition_dashboard">Road Condition Dashboard</button>
-                <button class="nav-tab" onclick="window.location.href='fire-accidents.html'" data-lang-key="accident_management">Accident Management</button>
+                <button class="nav-tab active" onclick="window.location.href='fire-road-condition.html'">لوحة حالة الطرق</button>
+                <button class="nav-tab" onclick="window.location.href='fire-accidents.html'">إدارة الحوادث</button>
             </div>
         </nav>
 
         <!-- Main Content -->
         <main class="main-content">
             <section class="road-condition-section">
-                <h2 data-lang-key="road_condition_dashboard">Road Condition Dashboard</h2>
+                <h2>لوحة حالة الطرق</h2>
                 
                 <!-- Fire Risk Assessment -->
                 <div class="risk-section">
-                    <h3 data-lang-key="fire_risk">Fire Risk Assessment</h3>
                     <div class="risk-grid">
                         <div class="risk-card low">
                             <div class="risk-header">
-                                <h4>North District</h4>
-                                <span class="risk-level low" data-lang-key="low">Low</span>
+                                <h4>المنطقة الشمالية</h4>
+                                <span class="risk-level low">منخفض</span>
                             </div>
                             <div class="risk-details">
                                 <div class="risk-factor">
-                                    <span class="factor-label">Vegetation:</span>
-                                    <span class="factor-value">Minimal</span>
+                                    <span class="factor-label">النباتات:</span>
+                                    <span class="factor-value">قليلة</span>
                                 </div>
                                 <div class="risk-factor">
-                                    <span class="factor-label">Weather:</span>
-                                    <span class="factor-value">Moderate</span>
+                                    <span class="factor-label">الطقس:</span>
+                                    <span class="factor-value">معتدل</span>
                                 </div>
                                 <div class="risk-factor">
-                                    <span class="factor-label">Access:</span>
-                                    <span class="factor-value" data-lang-key="clear">Clear</span>
+                                    <span class="factor-label">حالة الطريق:</span>
+                                    <span class="factor-value">مفتوح</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="risk-card high">
                             <div class="risk-header">
-                                <h4>South District</h4>
-                                <span class="risk-level high" data-lang-key="high">High</span>
+                                <h4>المنطقة الجنوبية</h4>
+                                <span class="risk-level high">مرتفع</span>
                             </div>
                             <div class="risk-details">
                                 <div class="risk-factor">
-                                    <span class="factor-label">Vegetation:</span>
-                                    <span class="factor-value">Dense</span>
+                                    <span class="factor-label">النباتات:</span>
+                                    <span class="factor-value">كثيفة</span>
                                 </div>
                                 <div class="risk-factor">
-                                    <span class="factor-label">Weather:</span>
-                                    <span class="factor-value">Hot/Dry</span>
+                                    <span class="factor-label">الطقس:</span>
+                                    <span class="factor-value">حار/جاف</span>
                                 </div>
                                 <div class="risk-factor">
-                                    <span class="factor-label">Access:</span>
-                                    <span class="factor-value" data-lang-key="blocked">Blocked</span>
+                                    <span class="factor-label">حالة الطريق:</span>
+                                    <span class="factor-value">مغلق</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="risk-card medium">
                             <div class="risk-header">
-                                <h4>East District</h4>
-                                <span class="risk-level medium" data-lang-key="medium">Medium</span>
+                                <h4>المنطقة الشرقية</h4>
+                                <span class="risk-level medium">متوسط</span>
                             </div>
                             <div class="risk-details">
                                 <div class="risk-factor">
-                                    <span class="factor-label">Vegetation:</span>
-                                    <span class="factor-value">Moderate</span>
+                                    <span class="factor-label">النباتات:</span>
+                                    <span class="factor-value">متوسطة</span>
                                 </div>
                                 <div class="risk-factor">
-                                    <span class="factor-label">Weather:</span>
-                                    <span class="factor-value">Windy</span>
+                                    <span class="factor-label">الطقس:</span>
+                                    <span class="factor-value">عاصف</span>
                                 </div>
                                 <div class="risk-factor">
-                                    <span class="factor-label">Access:</span>
-                                    <span class="factor-value" data-lang-key="clear">Clear</span>
+                                    <span class="factor-label">حالة الطريق:</span>
+                                    <span class="factor-value">مفتوح</span>
                                 </div>
                             </div>
                         </div>
@@ -122,55 +109,55 @@
 
                 <!-- Structural Integrity -->
                 <div class="structure-section">
-                    <h3 data-lang-key="structural_integrity">Structural Integrity</h3>
+                    <h3>سلامة المنشآت</h3>
                     <div class="structure-grid">
                         <div class="structure-card">
                             <div class="structure-header">
-                                <h4>Bridge - Main St</h4>
-                                <span class="structure-status good" data-lang-key="good">Good</span>
+                                <h4>الجسر - الشارع الرئيسي</h4>
+                                <span class="structure-status good">جيد</span>
                             </div>
                             <div class="structure-details">
                                 <div class="structure-info">
-                                    <span class="info-label">Load Capacity:</span>
+                                    <span class="info-label">قدرة التحمل:</span>
                                     <span class="info-value">95%</span>
                                 </div>
                                 <div class="structure-info">
-                                    <span class="info-label">Last Inspection:</span>
-                                    <span class="info-value">2 days ago</span>
+                                    <span class="info-label">آخر فحص:</span>
+                                    <span class="info-value">قبل يومين</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="structure-card">
                             <div class="structure-header">
-                                <h4>Tunnel - East Ave</h4>
-                                <span class="structure-status warning" data-lang-key="fair">Fair</span>
+                                <h4>النفق - الشارع الشرقي</h4>
+                                <span class="structure-status warning">مقبول</span>
                             </div>
                             <div class="structure-details">
                                 <div class="structure-info">
-                                    <span class="info-label">Ventilation:</span>
+                                    <span class="info-label">التهوية:</span>
                                     <span class="info-value">87%</span>
                                 </div>
                                 <div class="structure-info">
-                                    <span class="info-label">Drainage:</span>
-                                    <span class="info-value">Partial Block</span>
+                                    <span class="info-label">التصريف:</span>
+                                    <span class="info-value">انسداد جزئي</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="structure-card">
                             <div class="structure-header">
-                                <h4>Overpass - West Blvd</h4>
-                                <span class="structure-status good" data-lang-key="good">Good</span>
+                                <h4>الجسر العلوي - الشارع الغربي</h4>
+                                <span class="structure-status good">جيد</span>
                             </div>
                             <div class="structure-details">
                                 <div class="structure-info">
-                                    <span class="info-label">Stability:</span>
+                                    <span class="info-label">الثبات:</span>
                                     <span class="info-value">98%</span>
                                 </div>
                                 <div class="structure-info">
-                                    <span class="info-label">Access Clearance:</span>
-                                    <span class="info-value" data-lang-key="clear">Clear</span>
+                                    <span class="info-label">إمكانية الوصول:</span>
+                                    <span class="info-value">مفتوح</span>
                                 </div>
                             </div>
                         </div>
@@ -179,41 +166,41 @@
 
                 <!-- Access Clearance -->
                 <div class="access-section">
-                    <h3 data-lang-key="access_clearance">Access Clearance Status</h3>
+                    <h3>حالة إمكانية الوصول</h3>
                     <div class="access-list">
                         <div class="access-item clear">
                             <div class="access-icon">✅</div>
                             <div class="access-details">
-                                <span class="access-route">Fire Station → North District</span>
-                                <span class="access-status" data-lang-key="clear">Clear</span>
-                                <span class="access-time">ETA: 3.2 min</span>
+                                <span class="access-route">مركز الإطفاء ← المنطقة الشمالية</span>
+                                <span class="access-status">مفتوح</span>
+                                <span class="access-time">الوقت المتوقع: 3.2 دقيقة</span>
                             </div>
                         </div>
 
                         <div class="access-item blocked">
                             <div class="access-icon">🚫</div>
                             <div class="access-details">
-                                <span class="access-route">Fire Station → South District</span>
-                                <span class="access-status" data-lang-key="blocked">Blocked</span>
-                                <span class="access-time">Construction Work</span>
+                                <span class="access-route">مركز الإطفاء ← المنطقة الجنوبية</span>
+                                <span class="access-status">مغلق</span>
+                                <span class="access-time">أعمال إنشائية</span>
                             </div>
                         </div>
 
                         <div class="access-item clear">
                             <div class="access-icon">✅</div>
                             <div class="access-details">
-                                <span class="access-route">Fire Station → East District</span>
-                                <span class="access-status" data-lang-key="clear">Clear</span>
-                                <span class="access-time">ETA: 4.7 min</span>
+                                <span class="access-route">مركز الإطفاء ← المنطقة الشرقية</span>
+                                <span class="access-status">مفتوح</span>
+                                <span class="access-time">الوقت المتوقع: 4.7 دقيقة</span>
                             </div>
                         </div>
 
                         <div class="access-item clear">
                             <div class="access-icon">✅</div>
                             <div class="access-details">
-                                <span class="access-route">Fire Station → West District</span>
-                                <span class="access-status" data-lang-key="clear">Clear</span>
-                                <span class="access-time">ETA: 2.8 min</span>
+                                <span class="access-route">مركز الإطفاء ← المنطقة الغربية</span>
+                                <span class="access-status">مفتوح</span>
+                                <span class="access-time">الوقت المتوقع: 2.8 دقيقة</span>
                             </div>
                         </div>
                     </div>
@@ -222,7 +209,6 @@
         </main>
     </div>
 
-    <script src="src/js/language.js"></script>
     <script src="src/js/main.js"></script>
     <script src="src/js/fire-road-condition.js"></script>
 </body>

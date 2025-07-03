@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="ambulance_road_health_title">Ambulance - Road Health Monitoring</title>
+    <title>الإسعاف - مراقبة حالة الطرق</title>
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="stylesheet" href="src/css/dashboard.css">
     <link rel="stylesheet" href="src/css/components.css">
@@ -16,23 +16,11 @@
         <!-- Header -->
         <header class="header">
             <div class="header-content">
-                <h1 class="header-title" data-lang-key="ambulance_road_health_title">Ambulance - Road Health Monitoring</h1>
+                <h1 class="header-title">الإسعاف - مراقبة حالة الطرق</h1>
                 <div class="header-actions">
-                    <div class="language-selector">
-                        <button class="language-btn" id="languageToggle">
-                            <span id="currentLang">EN</span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M8 12l-4-4h8l-4 4z"/>
-                            </svg>
-                        </button>
-                        <div class="language-dropdown" id="languageDropdown">
-                            <button class="language-option" data-lang="en">English</button>
-                            <button class="language-option" data-lang="ar">العربية</button>
-                        </div>
-                    </div>
                     <div class="current-time" id="currentTime"></div>
-                    <button class="btn btn-secondary" onclick="window.location.href='index.html'" data-lang-key="back_to_main">
-                        Back to Main Dashboard
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+                        العودة إلى اللوحة الرئيسية
                     </button>
                 </div>
             </div>
@@ -41,79 +29,79 @@
         <!-- Navigation -->
         <nav class="service-nav">
             <div class="nav-tabs">
-                <button class="nav-tab active" onclick="window.location.href='ambulance-road-health.html'" data-lang-key="road_health_monitoring">Road Health Monitoring</button>
-                <button class="nav-tab" onclick="window.location.href='ambulance-accidents.html'" data-lang-key="accident_management">Accident Management</button>
+                <button class="nav-tab active" onclick="window.location.href='ambulance-road-health.html'">مراقبة حالة الطرق</button>
+                <button class="nav-tab" onclick="window.location.href='ambulance-accidents.html'">إدارة الحوادث</button>
             </div>
         </nav>
 
         <!-- Main Content -->
         <main class="main-content">
             <section class="road-health-section">
-                <h2 data-lang-key="road_health_monitoring">Road Health Monitoring</h2>
+                <h2>مراقبة حالة الطرق</h2>
                 
                 <!-- Emergency Routes -->
                 <div class="routes-section">
-                    <h3 data-lang-key="emergency_routes">Emergency Routes</h3>
+                    <h3>مسارات الطوارئ</h3>
                     <div class="routes-grid">
                         <div class="route-card">
                             <div class="route-header">
-                                <h4>Route A - Hospital District</h4>
-                                <span class="route-status clear" data-lang-key="clear">Clear</span>
+                                <h4>المسار أ - منطقة المستشفى</h4>
+                                <span class="route-status clear">مفتوح</span>
                             </div>
                             <div class="route-details">
                                 <div class="route-info">
-                                    <span class="info-label" data-lang-key="response_time">Response Time</span>
-                                    <span class="info-value">4.2 min</span>
+                                    <span class="info-label">وقت الاستجابة</span>
+                                    <span class="info-value">4.2 دقيقة</span>
                                 </div>
                                 <div class="route-info">
-                                    <span class="info-label">Traffic Level</span>
-                                    <span class="info-value">Low</span>
+                                    <span class="info-label">الازدحام</span>
+                                    <span class="info-value">منخفض</span>
                                 </div>
                                 <div class="route-info">
-                                    <span class="info-label">Road Condition</span>
-                                    <span class="info-value" data-lang-key="good">Good</span>
+                                    <span class="info-label">حالة الطريق</span>
+                                    <span class="info-value">جيدة</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="route-card">
                             <div class="route-header">
-                                <h4>Route B - City Center</h4>
-                                <span class="route-status blocked" data-lang-key="blocked">Blocked</span>
+                                <h4>المسار ب - وسط المدينة</h4>
+                                <span class="route-status blocked">مغلق</span>
                             </div>
                             <div class="route-details">
                                 <div class="route-info">
-                                    <span class="info-label" data-lang-key="response_time">Response Time</span>
-                                    <span class="info-value">8.7 min</span>
+                                    <span class="info-label">وقت الاستجابة</span>
+                                    <span class="info-value">8.7 دقيقة</span>
                                 </div>
                                 <div class="route-info">
-                                    <span class="info-label">Traffic Level</span>
-                                    <span class="info-value">High</span>
+                                    <span class="info-label">الازدحام</span>
+                                    <span class="info-value">مرتفع</span>
                                 </div>
                                 <div class="route-info">
-                                    <span class="info-label">Road Condition</span>
-                                    <span class="info-value" data-lang-key="poor">Poor</span>
+                                    <span class="info-label">حالة الطريق</span>
+                                    <span class="info-value">سيئة</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="route-card">
                             <div class="route-header">
-                                <h4>Route C - Industrial Zone</h4>
-                                <span class="route-status clear" data-lang-key="clear">Clear</span>
+                                <h4>المسار ج - المنطقة الصناعية</h4>
+                                <span class="route-status clear">مفتوح</span>
                             </div>
                             <div class="route-details">
                                 <div class="route-info">
-                                    <span class="info-label" data-lang-key="response_time">Response Time</span>
-                                    <span class="info-value">6.1 min</span>
+                                    <span class="info-label">وقت الاستجابة</span>
+                                    <span class="info-value">6.1 دقيقة</span>
                                 </div>
                                 <div class="route-info">
-                                    <span class="info-label">Traffic Level</span>
-                                    <span class="info-value">Medium</span>
+                                    <span class="info-label">الازدحام</span>
+                                    <span class="info-value">متوسط</span>
                                 </div>
                                 <div class="route-info">
-                                    <span class="info-label">Road Condition</span>
-                                    <span class="info-value" data-lang-key="fair">Fair</span>
+                                    <span class="info-label">حالة الطريق</span>
+                                    <span class="info-value">مقبولة</span>
                                 </div>
                             </div>
                         </div>
@@ -122,67 +110,67 @@
 
                 <!-- Unit Status -->
                 <div class="units-section">
-                    <h3 data-lang-key="emergency_units">Emergency Units Status</h3>
+                    <h3>حالة وحدات الطوارئ</h3>
                     <div class="units-grid">
                         <div class="unit-card available">
                             <div class="unit-header">
-                                <h4>Unit AMB-01</h4>
-                                <span class="unit-status available" data-lang-key="available">Available</span>
+                                <h4>الوحدة AMB-01</h4>
+                                <span class="unit-status available">متاح</span>
                             </div>
                             <div class="unit-details">
                                 <div class="unit-info">
-                                    <span class="info-label">Location</span>
-                                    <span class="info-value">Station North</span>
+                                    <span class="info-label">الموقع</span>
+                                    <span class="info-value">المحطة الشمالية</span>
                                 </div>
                                 <div class="unit-info">
-                                    <span class="info-label">Crew</span>
-                                    <span class="info-value">2 Paramedics</span>
+                                    <span class="info-label">الطاقم</span>
+                                    <span class="info-value">2 مسعف</span>
                                 </div>
                                 <div class="unit-info">
-                                    <span class="info-label">Equipment</span>
-                                    <span class="info-value">Full ALS</span>
+                                    <span class="info-label">المعدات</span>
+                                    <span class="info-value">دعم متقدم كامل</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="unit-card deployed">
                             <div class="unit-header">
-                                <h4>Unit AMB-02</h4>
-                                <span class="unit-status deployed" data-lang-key="deployed">Deployed</span>
+                                <h4>الوحدة AMB-02</h4>
+                                <span class="unit-status deployed">في المهمة</span>
                             </div>
                             <div class="unit-details">
                                 <div class="unit-info">
-                                    <span class="info-label">Location</span>
-                                    <span class="info-value">En Route</span>
+                                    <span class="info-label">الموقع</span>
+                                    <span class="info-value">في الطريق</span>
                                 </div>
                                 <div class="unit-info">
-                                    <span class="info-label">ETA</span>
-                                    <span class="info-value">3.2 min</span>
+                                    <span class="info-label">الوقت المتوقع</span>
+                                    <span class="info-value">3.2 دقيقة</span>
                                 </div>
                                 <div class="unit-info">
-                                    <span class="info-label">Priority</span>
-                                    <span class="info-value" data-lang-key="high">High</span>
+                                    <span class="info-label">الأولوية</span>
+                                    <span class="info-value">عالية</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="unit-card available">
                             <div class="unit-header">
-                                <h4>Unit AMB-03</h4>
-                                <span class="unit-status available" data-lang-key="available">Available</span>
+                                <h4>الوحدة AMB-03</h4>
+                                <span class="unit-status available">متاح</span>
                             </div>
                             <div class="unit-details">
                                 <div class="unit-info">
-                                    <span class="info-label">Location</span>
-                                    <span class="info-value">Station South</span>
+                                    <span class="info-label">الموقع</span>
+                                    <span class="info-value">المحطة الجنوبية</span>
                                 </div>
                                 <div class="unit-info">
-                                    <span class="info-label">Crew</span>
-                                    <span class="info-value">2 EMTs</span>
+                                    <span class="info-label">الطاقم</span>
+                                    <span class="info-value">2 فني طوارئ</span>
                                 </div>
                                 <div class="unit-info">
-                                    <span class="info-label">Equipment</span>
-                                    <span class="info-value">BLS</span>
+                                    <span class="info-label">المعدات</span>
+                                    <span class="info-value">دعم أساسي</span>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +180,6 @@
         </main>
     </div>
 
-    <script src="src/js/language.js"></script>
     <script src="src/js/main.js"></script>
     <script src="src/js/ambulance-road-health.js"></script>
 </body>

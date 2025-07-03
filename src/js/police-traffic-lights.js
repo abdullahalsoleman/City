@@ -93,10 +93,10 @@ class PoliceTrafficLights {
         // Queue length factor (40% weight)
         if (light.queueLength > 15) {
             congestionScore += 40;
-            analysis.reasoning.push(`High queue: ${light.queueLength} cars`);
+            analysis.reasoning.push(`High queue: ${light.queueLength} `);
         } else if (light.queueLength > 8) {
             congestionScore += 20;
-            analysis.reasoning.push(`Medium queue: ${light.queueLength} cars`);
+            analysis.reasoning.push(`Medium queue: ${light.queueLength} `);
         }
 
         // Time since last phase change factor (10% weight)
@@ -262,7 +262,7 @@ class PoliceTrafficLights {
             const queueElement = document.getElementById(`queue-${light.id}`);
             
             if (vehiclesElement) vehiclesElement.textContent = light.vehicles;
-            if (queueElement) queueElement.textContent = `${light.queueLength} cars`;
+            if (queueElement) queueElement.textContent = `${light.queueLength} `;
 
             // Update light display with congestion-based styling
             const intersection = document.querySelector(`[data-intersection="${this.getIntersectionId(light.id)}"]`);
@@ -412,7 +412,7 @@ class PoliceTrafficLights {
         // Apply immediate effects of phase change
         if (previousPhase === 'red' && light.phase === 'green') {
             // Just turned green - vehicles start moving immediately
-            this.logAIDecision(light, `🟢 GREEN: Traffic starts moving (${light.queueLength} cars in queue)`, 
+            this.logAIDecision(light, `🟢 GREEN: Traffic starts moving (${light.queueLength}  in queue)`, 
                 this.analyzeTrafficConditions(light));
         } else if (previousPhase === 'green' && light.phase === 'yellow') {
             // Just turned yellow - some vehicles rush through

@@ -6,6 +6,16 @@ class FireAccidents {
         this.speechSynthesis = window.speechSynthesis;
         this.autoSimulationTimer = null;
         
+        // Initialize voices
+        if (this.speechSynthesis) {
+            // Load voices if they're not already loaded
+            if (this.speechSynthesis.getVoices().length === 0) {
+                this.speechSynthesis.addEventListener('voiceschanged', () => {
+                    console.log('تم تحميل الأصوات');
+                });
+            }
+        }
+        
         this.init();
     }
 
@@ -17,8 +27,6 @@ class FireAccidents {
         this.startAutoSimulation();
     }
 
-
-
     startAutoSimulation() {
         // Start automatic simulation after 30 seconds
         this.autoSimulationTimer = setTimeout(() => {
@@ -29,7 +37,7 @@ class FireAccidents {
                 const nextSimulationTime = 75000 + Math.random() * 75000; // 75-150 seconds
                 setTimeout(() => {
                     // Only simulate if there are no unresolved fire emergencies
-                    const unresolvedAccidents = this.accidents.filter(acc => acc.status === 'unresolved');
+                    const unresolvedAccidents = this.accidents.filter(acc => acc.status === 'غير_محلول');
                     if (unresolvedAccidents.length === 0) {
                         this.simulateNewAccident();
                     }
@@ -43,50 +51,50 @@ class FireAccidents {
 
     simulateNewAccident() {
         const locations = [
-            'Apartment Complex - Building A',
-            'Industrial Warehouse District',
-            'Downtown Office Tower',
-            'Residential House - Oak Street',
-            'Chemical Manufacturing Plant',
-            'Shopping Mall - West Wing',
-            'Forest Area - Pine Ridge',
-            'School Building - Gymnasium',
-            'Hospital Parking Garage',
-            'Municipal Building - City Hall'
+            'مجمع سكني - مبنى أ',
+            'منطقة المستودعات الصناعية',
+            'برج المكاتب وسط المدينة',
+            'منزل سكني - شارع البلوط',
+            'مصنع المواد الكيميائية',
+            'المركز التجاري - الجناح الغربي',
+            'منطقة الغابات - تلة الصنوبر',
+            'المدرسة - صالة الألعاب الرياضية',
+            'موقف السيارات بالمستشفى',
+            'المبنى البلدي - قاعة المدينة'
         ];
         
         const descriptions = [
-            'Structure fire with heavy smoke and flames',
-            'Electrical fire spreading rapidly',
-            'Gas leak with potential explosion risk',
-            'Kitchen fire spreading to adjacent rooms',
-            'Chemical fire - hazardous materials involved',
-            'Smoke detected in ventilation system',
-            'Wildfire approaching residential area',
-            'Vehicle fire in parking garage',
-            'Propane tank explosion reported',
-            'Electrical transformer fire'
+            'حريق هيكلي مع دخان وألسنة لهب كثيفة',
+            'حريق كهربائي ينتشر بسرعة',
+            'تسرب غاز مع خطر انفجار محتمل',
+            'حريق مطبخ ينتشر إلى الغرف المجاورة',
+            'حريق كيميائي - مواد خطرة',
+            'دخان في نظام التهوية',
+            'حريق غابات يقترب من المنطقة السكنية',
+            'حريق سيارة في موقف السيارات',
+            'انفجار خزان البروبان',
+            'حريق محول كهربائي'
         ];
         
-        const priorities = ['high', 'medium'];
-        const priorityWeights = [0.8, 0.2]; // 80% high, 20% medium - fire emergencies are typically high priority
+        const priorities = ['عالي', 'متوسط'];
+        const priorityWeights = [0.8, 0.2]; // 80% عالي, 20% متوسط
         
         // Weighted random selection for priority
         const randomPriority = Math.random();
         let selectedPriority;
         if (randomPriority < priorityWeights[0]) {
-            selectedPriority = priorities[0]; // high
+            selectedPriority = priorities[0]; // عالي
         } else {
-            selectedPriority = priorities[1]; // medium
+            selectedPriority = priorities[1]; // متوسط
         }
         
         const newAccident = {
             id: Date.now(),
             location: locations[Math.floor(Math.random() * locations.length)],
             description: descriptions[Math.floor(Math.random() * descriptions.length)],
-            status: 'unresolved',
+            status: 'غير_محلول',
             priority: selectedPriority,
-            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })
         };
         
         this.accidents.unshift(newAccident);
@@ -95,28 +103,30 @@ class FireAccidents {
         // Start continuous alert for the new accident
         if (window.audioManager) {
             window.audioManager.startContinuousAlert(newAccident, 'fire');
+        } else {
+            this.playAlert(newAccident);
         }
         
-        console.log('AUTO-SIMULATED: New fire emergency:', newAccident);
+        console.log('محاكاة تلقائية: حريق جديد:', newAccident);
     }
 
     generateInitialAccidents() {
         this.accidents = [
             {
                 id: 1,
-                location: 'Industrial Zone - Warehouse Fire',
-                description: 'Large fire reported in warehouse, potential hazardous materials',
-                status: 'unresolved',
-                priority: 'high',
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                location: 'المنطقة الصناعية - حريق مستودع',
+                description: 'حريق كبير في المستودع، مواد خطرة محتملة',
+                status: 'غير_محلول',
+                priority: 'عالي',
+                time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })
             },
             {
                 id: 2,
-                location: 'Residential Area - Kitchen Fire',
-                description: 'Small kitchen fire, smoke reported, potential for spread',
-                status: 'in_progress',
-                priority: 'medium',
-                time: new Date(Date.now() - 45 * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                location: 'منطقة سكنية - حريق مطبخ',
+                description: 'حريق صغير في المطبخ، دخان متصاعد، احتمال انتشار',
+                status: 'قيد_المعالجة',
+                priority: 'متوسط',
+                time: new Date(Date.now() - 45 * 60000).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })
             }
         ];
     }
@@ -135,31 +145,31 @@ class FireAccidents {
             
             accidentCard.innerHTML = `
                 <div class="accident-header">
-                    <div class="accident-priority ${accident.priority}">
-                        <span data-lang-key="priority">Priority</span>: <span data-lang-key="${accident.priority}">${accident.priority}</span>
+                    <div class="accident-priority ${accident.priority === 'عالي' ? 'high' : 'medium'}">
+                        <span>الأولوية</span>: <span>${accident.priority}</span>
                     </div>
-                    <div class="accident-status ${accident.status.replace('_', '-')}" data-lang-key="${accident.status}">${accident.status.replace('_', ' ')}</div>
+                    <div class="accident-status ${accident.status.replace('_', '-')}">${accident.status.replace('_', ' ')}</div>
                 </div>
                 <div class="accident-details">
                     <div class="accident-location">
-                        <strong data-lang-key="location">Location</strong>: ${accident.location}
+                        <strong>الموقع</strong>: ${accident.location}
                     </div>
                     <div class="accident-description">
-                        <strong data-lang-key="description">Description</strong>: 
+                        <strong>الوصف</strong>: 
                         <span>${accident.description}</span>
                     </div>
                     <div class="accident-time">
-                        <strong>Time</strong>: ${accident.time}
+                        <strong>الوقت</strong>: ${accident.time}
                     </div>
                 </div>
                 <div class="accident-actions">
                     <button class="btn btn-warning" onclick="fireAccidentsApp.markAccidentInProgress(${accident.id})" 
-                            data-lang-key="mark_in_progress" ${accident.status === 'in_progress' ? 'disabled' : ''}>
-                        Mark In Progress
+                            ${accident.status !== 'غير_محلول' ? 'disabled' : ''}>
+                        تحديد قيد المعالجة
                     </button>
                     <button class="btn btn-success" onclick="fireAccidentsApp.markAccidentResolved(${accident.id})" 
-                            data-lang-key="mark_resolved" ${accident.status === 'unresolved' ? 'disabled' : ''}>
-                        Mark Resolved
+                            ${accident.status !== 'قيد_المعالجة' ? 'disabled' : ''}>
+                        تم الحل
                     </button>
                 </div>
             `;
@@ -171,17 +181,12 @@ class FireAccidents {
     markAccidentInProgress(accidentId) {
         const accident = this.accidents.find(a => a.id === accidentId);
         if (accident) {
-            accident.status = 'in_progress';
+            accident.status = 'قيد_المعالجة';
             this.renderAccidents();
             
             // Stop continuous alerts when status changes to "In Progress"
             if (window.audioManager) {
                 window.audioManager.stopContinuousAlert();
-            }
-            
-            // Update language if needed
-            if (window.languageManager) {
-                window.languageManager.updateTexts(window.languageManager.getCurrentLanguage());
             }
         }
     }
@@ -189,17 +194,12 @@ class FireAccidents {
     markAccidentResolved(accidentId) {
         const accident = this.accidents.find(a => a.id === accidentId);
         if (accident) {
-            accident.status = 'resolved';
+            accident.status = 'تم_الحل';
             this.renderAccidents();
             
             // Stop continuous alerts if any are active
             if (window.audioManager) {
                 window.audioManager.stopContinuousAlert();
-            }
-            
-            // Update language if needed
-            if (window.languageManager) {
-                window.languageManager.updateTexts(window.languageManager.getCurrentLanguage());
             }
         }
     }
@@ -212,13 +212,24 @@ class FireAccidents {
             // Fallback to original alert system if audioManager is not available
             if (this.alertAudio) {
                 this.alertAudio.currentTime = 0;
-                this.alertAudio.play().catch(e => console.log('Audio play failed:', e));
+                this.alertAudio.play().catch(e => console.log('فشل تشغيل الصوت:', e));
             }
             
-            const text = `Fire emergency reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}.`;
+            const text = `تم الإبلاغ عن حريق في ${accident.location}. ${accident.description}. الأولوية: ${accident.priority}.`;
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.rate = 0.8;
             utterance.volume = 0.8;
+            utterance.lang = 'ar-SA';
+            
+            // Try to find an Arabic voice
+            const voices = this.speechSynthesis.getVoices();
+            const arabicVoice = voices.find(voice => voice.lang.startsWith('ar'));
+            if (arabicVoice) {
+                utterance.voice = arabicVoice;
+            }
+            
+            // Cancel any ongoing speech
+            this.speechSynthesis.cancel();
             
             if (this.speechSynthesis) {
                 this.speechSynthesis.speak(utterance);
@@ -245,7 +256,7 @@ class FireAccidents {
 
     checkForNewAccidents() {
         // This method is kept for compatibility but auto-simulation handles new fire emergencies now
-        console.log('Manual fire emergency checking disabled - using auto-simulation system');
+        console.log('تم تعطيل التحقق اليدوي من الحرائق - استخدام نظام المحاكاة التلقائي');
     }
 
     startDataUpdates() {
@@ -256,8 +267,5 @@ class FireAccidents {
     }
 }
 
-// Initialize fire accidents
-let fireAccidentsApp;
-document.addEventListener('DOMContentLoaded', () => {
-    fireAccidentsApp = new FireAccidents();
-});
+// Initialize the application
+const fireAccidentsApp = new FireAccidents();

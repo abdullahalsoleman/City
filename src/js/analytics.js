@@ -30,7 +30,7 @@ class AnalyticsDashboard {
         
         const avgWaitElement = document.querySelector('[data-stat="avgWait"]');
         if (avgWaitElement) {
-            avgWaitElement.textContent = `${this.stats.avgWait}min`;
+            avgWaitElement.textContent = `${this.stats.avgWait} د`;
         }
         
         const efficiencyElement = document.querySelector('[data-stat="flowEfficiency"]');
@@ -53,82 +53,121 @@ class AnalyticsDashboard {
     }
 
     createTrafficChart() {
-        const canvas = document.getElementById('trafficCanvas');
-        if (!canvas) return;
+        const ctx = document.getElementById('trafficChart');
+        if (!ctx) return;
+
+        // Arabic day names
+        const days = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
         
-        const ctx = canvas.getContext('2d');
-        const data = [65, 59, 80, 81, 56, 55, 40];
-        const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Simple line chart simulation
-        ctx.strokeStyle = '#4F46E5';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        
-        for (let i = 0; i < data.length; i++) {
-            const x = (i / (data.length - 1)) * canvas.width;
-            const y = canvas.height - (data[i] / 100) * canvas.height;
-            
-            if (i === 0) {
-                ctx.moveTo(x, y);
-            } else {
-                ctx.lineTo(x, y);
+        // Sample data (60-80% range)
+        const data = [60, 58, 70, 72, 55, 52, 42];
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: days,
+                datasets: [{
+                    label: 'كثافة المرور (%)',
+                    data: data,
+                    borderColor: '#4CAF50',
+                    backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#4CAF50',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        top: 20,
+                        right: 20,
+                        bottom: 20,
+                        left: 20
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            stepSize: 20,
+                            font: {
+                                size: 14
+                            },
+                            color: '#fff'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 14
+                            },
+                            color: '#fff'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        align: 'end',
+                        labels: {
+                            color: '#fff',
+                            font: {
+                                size: 14
+                            },
+                            boxWidth: 15
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: {
+                            size: 14
+                        },
+                        bodyFont: {
+                            size: 14
+                        },
+                        padding: 10,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.parsed.y}%`;
+                            }
+                        }
+                    }
+                }
             }
-        }
-        
-        ctx.stroke();
-        
-        // Draw points
-        ctx.fillStyle = '#4F46E5';
-        for (let i = 0; i < data.length; i++) {
-            const x = (i / (data.length - 1)) * canvas.width;
-            const y = canvas.height - (data[i] / 100) * canvas.height;
-            
-            ctx.beginPath();
-            ctx.arc(x, y, 3, 0, 2 * Math.PI);
-            ctx.fill();
-        }
+        });
     }
 
     updateActivityFeed() {
+        const activityFeed = document.getElementById('activityFeed');
+        if (!activityFeed) return;
+
         const activities = [
-            'new_incident_detected',
-            'traffic_light_updated',
-            'emergency_unit_dispatched',
-            'road_closure_reported',
-            'ai_optimization_complete'
+            { time: '14:32', text: 'تم اكتشاف حادث جديد' },
+            { time: '14:28', text: 'تم تحديث توقيت إشارة المرور' },
+            { time: '14:25', text: 'تم إرسال وحدة طوارئ' }
         ];
-        
-        if (Math.random() < 0.1) {
-            const activityFeed = document.getElementById('activityFeed');
-            if (activityFeed) {
-                const newActivity = document.createElement('div');
-                newActivity.className = 'activity-item';
-                
-                const activityKey = activities[Math.floor(Math.random() * activities.length)];
-                const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                
-                newActivity.innerHTML = `
-                    <span class="activity-time">${currentTime}</span>
-                    <span class="activity-text" data-lang-key="${activityKey}">${activityKey.replace(/_/g, ' ')}</span>
-                `;
-                
-                activityFeed.insertBefore(newActivity, activityFeed.firstChild);
-                
-                // Keep only latest 5 activities
-                while (activityFeed.children.length > 5) {
-                    activityFeed.removeChild(activityFeed.lastChild);
-                }
-                
-                // Update language for new elements
-                if (window.languageManager) {
-                    window.languageManager.updateTexts(window.languageManager.getCurrentLanguage());
-                }
-            }
-        }
+
+        activityFeed.innerHTML = activities.map(activity => `
+            <div class="activity-item">
+                <span class="activity-time">${activity.time}</span>
+                <span class="activity-spacer">&nbsp;&nbsp;&nbsp;</span>
+                <span class="activity-text">${activity.text}</span>
+            </div>
+        `).join('');
     }
 
     startDataUpdates() {
@@ -141,7 +180,7 @@ class AnalyticsDashboard {
         // Redraw chart every 30 seconds
         setInterval(() => {
             this.createTrafficChart();
-            console.log('Analytics: 30-second data refresh');
+            console.log('تحديث البيانات: تحديث كل 30 ثانية');
         }, 30000);
     }
 }

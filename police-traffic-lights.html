@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="police_traffic_lights_title">Police - Traffic Light Monitoring</title>
+    <title>الشرطة - مراقبة إشارات المرور</title>
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="stylesheet" href="src/css/dashboard.css">
     <link rel="stylesheet" href="src/css/components.css">
@@ -16,23 +16,11 @@
         <!-- Header -->
         <header class="header">
             <div class="header-content">
-                <h1 class="header-title" data-lang-key="police_traffic_lights_title">Police - Traffic Light Monitoring</h1>
+                <h1 class="header-title">الشرطة - مراقبة إشارات المرور</h1>
                 <div class="header-actions">
-                    <div class="language-selector">
-                        <button class="language-btn" id="languageToggle">
-                            <span id="currentLang">EN</span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M8 12l-4-4h8l-4 4z"/>
-                            </svg>
-                        </button>
-                        <div class="language-dropdown" id="languageDropdown">
-                            <button class="language-option" data-lang="en">English</button>
-                            <button class="language-option" data-lang="ar">العربية</button>
-                        </div>
-                    </div>
                     <div class="current-time" id="currentTime"></div>
-                    <button class="btn btn-secondary" onclick="window.location.href='index.html'" data-lang-key="back_to_main">
-                        Back to Main Dashboard
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+                        العودة إلى اللوحة الرئيسية
                     </button>
                 </div>
             </div>
@@ -41,21 +29,20 @@
         <!-- Navigation -->
         <nav class="service-nav">
             <div class="nav-tabs">
-                <button class="nav-tab active" onclick="window.location.href='police-traffic-lights.html'" data-lang-key="traffic_light_monitoring">Traffic Light Monitoring</button>
-                <button class="nav-tab" onclick="window.location.href='police-accidents.html'" data-lang-key="accident_management">Accident Management</button>
-                <button class="nav-tab" onclick="window.location.href='police-infrastructure.html'" data-lang-key="infrastructure_health">Infrastructure Health</button>
+                <button class="nav-tab active" onclick="window.location.href='police-traffic-lights.html'">مراقبة إشارات المرور</button>
+                <button class="nav-tab" onclick="window.location.href='police-accidents.html'">إدارة الحوادث</button>
+                <button class="nav-tab" onclick="window.location.href='police-infrastructure.html'">صحة البنية التحتية</button>
             </div>
         </nav>
 
         <!-- Main Content -->
         <main class="main-content">
             <section class="monitoring-section">
-                <h2 data-lang-key="traffic_light_monitoring">Traffic Light Monitoring</h2>
                 <div class="traffic-grid">
                     <div class="traffic-intersection" data-intersection="north-main">
                         <div class="intersection-header">
-                            <h3 data-lang-key="intersection">Intersection</h3>
-                            <span class="intersection-name">North Main & 1st St</span>
+                            <h3>التقاطع</h3>
+                            <span class="intersection-name">شمال الرئيسي والشارع الأول</span>
                         </div>
                         <div class="traffic-light-display">
                             <div class="traffic-light">
@@ -64,25 +51,25 @@
                                 <div class="light green"></div>
                             </div>
                             <div class="light-timer">
-                                <span class="timer-value" id="timer-1">45s</span>
+                                <span class="timer-value" id="timer-1">45 ث</span>
                             </div>
                         </div>
                         <div class="intersection-stats">
                             <div class="stat-item vehicle-count">
-                                <span class="stat-label" data-lang-key="vehicle_count">Vehicle Count</span>
+                                <span class="stat-label">عدد المركبات</span>
                                 <span class="stat-value" id="vehicles-1">23</span>
                             </div>
                             <div class="stat-item queue-length">
-                                <span class="stat-label" data-lang-key="queue_length">Queue Length</span>
-                                <span class="stat-value" id="queue-1">8 cars</span>
+                                <span class="stat-label">طول الطابور</span>
+                                <span class="stat-value" id="queue-1">8 سيارات</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="traffic-intersection" data-intersection="south-main">
                         <div class="intersection-header">
-                            <h3 data-lang-key="intersection">Intersection</h3>
-                            <span class="intersection-name">South Main & 2nd St</span>
+                            <h3>التقاطع</h3>
+                            <span class="intersection-name">جنوب الرئيسي والشارع الثاني</span>
                         </div>
                         <div class="traffic-light-display">
                             <div class="traffic-light">
@@ -91,25 +78,25 @@
                                 <div class="light green active"></div>
                             </div>
                             <div class="light-timer">
-                                <span class="timer-value" id="timer-2">12s</span>
+                                <span class="timer-value" id="timer-2">12 ث</span>
                             </div>
                         </div>
                         <div class="intersection-stats">
                             <div class="stat-item vehicle-count">
-                                <span class="stat-label" data-lang-key="vehicle_count">Vehicle Count</span>
+                                <span class="stat-label">عدد المركبات</span>
                                 <span class="stat-value" id="vehicles-2">15</span>
                             </div>
                             <div class="stat-item queue-length">
-                                <span class="stat-label" data-lang-key="queue_length">Queue Length</span>
-                                <span class="stat-value" id="queue-2">5 cars</span>
+                                <span class="stat-label">طول الطابور</span>
+                                <span class="stat-value" id="queue-2">5 سيارات</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="traffic-intersection" data-intersection="east-ave">
                         <div class="intersection-header">
-                            <h3 data-lang-key="intersection">Intersection</h3>
-                            <span class="intersection-name">East Ave & 3rd St</span>
+                            <h3>التقاطع</h3>
+                            <span class="intersection-name">الشارع الشرقي والشارع الثالث</span>
                         </div>
                         <div class="traffic-light-display">
                             <div class="traffic-light">
@@ -118,25 +105,25 @@
                                 <div class="light green"></div>
                             </div>
                             <div class="light-timer">
-                                <span class="timer-value" id="timer-3">3s</span>
+                                <span class="timer-value" id="timer-3">3 ث</span>
                             </div>
                         </div>
                         <div class="intersection-stats">
                             <div class="stat-item vehicle-count">
-                                <span class="stat-label" data-lang-key="vehicle_count">Vehicle Count</span>
+                                <span class="stat-label">عدد المركبات</span>
                                 <span class="stat-value" id="vehicles-3">31</span>
                             </div>
                             <div class="stat-item queue-length">
-                                <span class="stat-label" data-lang-key="queue_length">Queue Length</span>
-                                <span class="stat-value" id="queue-3">12 cars</span>
+                                <span class="stat-label">طول الطابور</span>
+                                <span class="stat-value" id="queue-3">12 سيارة</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="traffic-intersection" data-intersection="west-blvd">
                         <div class="intersection-header">
-                            <h3 data-lang-key="intersection">Intersection</h3>
-                            <span class="intersection-name">West Blvd & 4th St</span>
+                            <h3>التقاطع</h3>
+                            <span class="intersection-name">الشارع الغربي والشارع الرابع</span>
                         </div>
                         <div class="traffic-light-display">
                             <div class="traffic-light">
@@ -145,17 +132,17 @@
                                 <div class="light green"></div>
                             </div>
                             <div class="light-timer">
-                                <span class="timer-value" id="timer-4">67s</span>
+                                <span class="timer-value" id="timer-4">67 ث</span>
                             </div>
                         </div>
                         <div class="intersection-stats">
                             <div class="stat-item vehicle-count">
-                                <span class="stat-label" data-lang-key="vehicle_count">Vehicle Count</span>
+                                <span class="stat-label">عدد المركبات</span>
                                 <span class="stat-value" id="vehicles-4">19</span>
                             </div>
                             <div class="stat-item queue-length">
-                                <span class="stat-label" data-lang-key="queue_length">Queue Length</span>
-                                <span class="stat-value" id="queue-4">7 cars</span>
+                                <span class="stat-label">طول الطابور</span>
+                                <span class="stat-value" id="queue-4">7 سيارات</span>
                             </div>
                         </div>
                     </div>
@@ -163,22 +150,22 @@
 
                 <!-- System Alerts -->
                 <div class="alerts-section">
-                    <h3 data-lang-key="system_alerts">System Alerts</h3>
+                    <h3>تنبيهات النظام</h3>
                     <div class="alerts-list" id="systemAlerts">
                         <div class="alert-item warning">
                             <div class="alert-icon">⚠️</div>
                             <div class="alert-content">
-                                <span class="alert-text" data-lang-key="high_traffic_detected">High traffic detected</span>
-                                <span class="alert-location">North Main & 1st St</span>
-                                <span class="alert-time">2 min ago</span>
+                                <span class="alert-text">تم رصد حركة مرور كثيفة</span>
+                                <span class="alert-location">شمال الرئيسي والشارع الأول</span>
+                                <span class="alert-time">قبل دقيقتين</span>
                             </div>
                         </div>
                         <div class="alert-item error">
                             <div class="alert-icon">🔧</div>
                             <div class="alert-content">
-                                <span class="alert-text" data-lang-key="malfunction_reported">Malfunction reported</span>
-                                <span class="alert-location">East Ave & 3rd St</span>
-                                <span class="alert-time">8 min ago</span>
+                                <span class="alert-text">تم الإبلاغ عن عطل</span>
+                                <span class="alert-location">الشارع الشرقي والشارع الثالث</span>
+                                <span class="alert-time">قبل 8 دقائق</span>
                             </div>
                         </div>
                     </div>
@@ -191,7 +178,6 @@
         <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0" type="audio/wav">
     </audio>
 
-    <script src="src/js/language.js"></script>
     <script src="src/js/main.js"></script>
     <script src="src/js/police-traffic-lights.js"></script>
 </body>

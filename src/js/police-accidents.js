@@ -6,6 +6,16 @@ class PoliceAccidents {
         this.speechSynthesis = window.speechSynthesis;
         this.autoSimulationTimer = null;
         
+        // Initialize voices
+        if (this.speechSynthesis) {
+            // Load voices if they're not already loaded
+            if (this.speechSynthesis.getVoices().length === 0) {
+                this.speechSynthesis.addEventListener('voiceschanged', () => {
+                    console.log('تم تحميل الأصوات');
+                });
+            }
+        }
+        
         this.init();
     }
 
@@ -17,8 +27,6 @@ class PoliceAccidents {
         this.startAutoSimulation();
     }
 
-
-
     startAutoSimulation() {
         // Start automatic simulation after 30 seconds
         this.autoSimulationTimer = setTimeout(() => {
@@ -29,7 +37,7 @@ class PoliceAccidents {
                 const nextSimulationTime = 45000 + Math.random() * 45000; // 45-90 seconds
                 setTimeout(() => {
                     // Only simulate if there are no unresolved accidents
-                    const unresolvedAccidents = this.accidents.filter(acc => acc.status === 'unresolved');
+                    const unresolvedAccidents = this.accidents.filter(acc => acc.status === 'غير_محلول');
                     if (unresolvedAccidents.length === 0) {
                         this.simulateNewAccident();
                     }
@@ -43,52 +51,52 @@ class PoliceAccidents {
 
     simulateNewAccident() {
         const locations = [
-            'Main Street & Oak Avenue',
-            'Highway 101 Southbound',
-            'Downtown Business District',
-            'School Zone - Maple Elementary',
-            'Shopping Center Parking Lot',
-            'Industrial District - Factory Road',
-            'Residential Area - Pine Street',
-            'City Center - Traffic Circle',
-            'Bridge Overpass - Route 66',
-            'Hospital Emergency Access'
+            'شارع الرئيسي وشارع البلوط',
+            'الطريق السريع 101 جنوباً',
+            'منطقة وسط المدينة التجارية',
+            'المنطقة المدرسية - مدرسة الشجر الابتدائية',
+            'موقف مركز التسوق',
+            'المنطقة الصناعية - طريق المصنع',
+            'المنطقة السكنية - شارع الصنوبر',
+            'وسط المدينة - الدوار',
+            'جسر العبور - الطريق 66',
+            'مدخل الطوارئ للمستشفى'
         ];
         
         const descriptions = [
-            'Multi-vehicle collision blocking traffic lanes',
-            'Vehicle rollover with potential injuries',
-            'Pedestrian accident at crosswalk',
-            'Head-on collision between two vehicles',
-            'Vehicle vs bicycle accident',
-            'Single vehicle collision with barriers',
-            'Rear-end collision with multiple vehicles',
-            'Vehicle struck utility pole',
-            'Debris on roadway causing accidents',
-            'Emergency vehicle collision'
+            'تصادم متعدد المركبات يعيق حركة المرور',
+            'انقلاب مركبة مع احتمال وجود إصابات',
+            'حادث مشاة عند معبر المشاة',
+            'اصطدام مباشر بين مركبتين',
+            'حادث بين مركبة ودراجة هوائية',
+            'اصطدام مركبة واحدة بالحواجز',
+            'اصطدام خلفي مع عدة مركبات',
+            'مركبة اصطدمت بعمود كهرباء',
+            'حطام على الطريق يسبب حوادث',
+            'حادث مركبة طوارئ'
         ];
         
-        const priorities = ['high', 'medium', 'low'];
+        const priorities = ['عالي', 'متوسط', 'منخفض'];
         const priorityWeights = [0.4, 0.4, 0.2]; // 40% high, 40% medium, 20% low
         
         // Weighted random selection for priority
         const randomPriority = Math.random();
         let selectedPriority;
         if (randomPriority < priorityWeights[0]) {
-            selectedPriority = priorities[0]; // high
+            selectedPriority = priorities[0]; // عالي
         } else if (randomPriority < priorityWeights[0] + priorityWeights[1]) {
-            selectedPriority = priorities[1]; // medium
+            selectedPriority = priorities[1]; // متوسط
         } else {
-            selectedPriority = priorities[2]; // low
+            selectedPriority = priorities[2]; // منخفض
         }
         
         const newAccident = {
             id: Date.now(),
             location: locations[Math.floor(Math.random() * locations.length)],
             description: descriptions[Math.floor(Math.random() * descriptions.length)],
-            status: 'unresolved',
+            status: 'غير_محلول',
             priority: selectedPriority,
-            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })
         };
         
         this.accidents.unshift(newAccident);
@@ -99,26 +107,26 @@ class PoliceAccidents {
             window.audioManager.startContinuousAlert(newAccident, 'police');
         }
         
-        console.log('AUTO-SIMULATED: New traffic accident:', newAccident);
+        console.log('محاكاة تلقائية: حادث مرور جديد:', newAccident);
     }
 
     generateInitialAccidents() {
         this.accidents = [
             {
                 id: 1,
-                location: 'North Main & 1st St',
-                description: 'Two-vehicle collision blocking northbound lane',
-                status: 'unresolved',
-                priority: 'high',
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                location: 'شارع الشمال الرئيسي وشارع الأول',
+                description: 'تصادم بين مركبتين يعيق المسار الشمالي',
+                status: 'تم الحل',
+                priority: 'عالي',
+                time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })
             },
             {
                 id: 2,
-                location: 'West Blvd & 4th St',
-                description: 'Vehicle breakdown causing minor delays',
-                status: 'in_progress',
-                priority: 'medium',
-                time: new Date(Date.now() - 30 * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                location: 'شارع الغرب وشارع الرابع',
+                description: 'عطل في مركبة يسبب تأخيرات بسيطة',
+                status: 'قيد_المعالجة',
+                priority: 'متوسط',
+                time: new Date(Date.now() - 30 * 60000).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })
             }
         ];
     }
@@ -138,30 +146,30 @@ class PoliceAccidents {
             accidentCard.innerHTML = `
                 <div class="accident-header">
                     <div class="accident-priority ${accident.priority}">
-                        <span data-lang-key="priority">Priority</span>: <span data-lang-key="${accident.priority}">${accident.priority}</span>
+                        <span>الأولوية</span>: <span>${accident.priority}</span>
                     </div>
-                    <div class="accident-status ${accident.status.replace('_', '-')}" data-lang-key="${accident.status}">${accident.status.replace('_', ' ')}</div>
+                    <div class="accident-status ${accident.status.replace('_', '-')}">${accident.status.replace('_', ' ')}</div>
                 </div>
                 <div class="accident-details">
                     <div class="accident-location">
-                        <strong data-lang-key="location">Location</strong>: ${accident.location}
+                        <strong>الموقع</strong>: ${accident.location}
                     </div>
                     <div class="accident-description">
-                        <strong data-lang-key="description">Description</strong>: 
+                        <strong>الوصف</strong>: 
                         <span>${accident.description}</span>
                     </div>
                     <div class="accident-time">
-                        <strong>Time</strong>: ${accident.time}
+                        <strong>الوقت</strong>: ${accident.time}
                     </div>
                 </div>
                 <div class="accident-actions">
                     <button class="btn btn-warning" onclick="policeAccidentsApp.markAccidentInProgress(${accident.id})" 
-                            data-lang-key="mark_in_progress" ${accident.status === 'in_progress' ? 'disabled' : ''}>
-                        Mark In Progress
+                            ${accident.status !== 'غير_محلول' ? 'disabled' : ''}>
+                        تحديد قيد المعالجة
                     </button>
                     <button class="btn btn-success" onclick="policeAccidentsApp.markAccidentResolved(${accident.id})" 
-                            data-lang-key="mark_resolved" ${accident.status === 'unresolved' ? 'disabled' : ''}>
-                        Mark Resolved
+                            ${accident.status !== 'قيد_المعالجة' ? 'disabled' : ''}>
+                        تم الحل
                     </button>
                 </div>
             `;
@@ -173,7 +181,7 @@ class PoliceAccidents {
     markAccidentInProgress(accidentId) {
         const accident = this.accidents.find(a => a.id === accidentId);
         if (accident) {
-            accident.status = 'in_progress';
+            accident.status = 'قيد_المعالجة';
             this.renderAccidents();
             
             // Stop continuous alerts when status changes to "In Progress"
@@ -184,14 +192,9 @@ class PoliceAccidents {
             // Reset countdown display
             const countdownTimer = document.getElementById('countdownTimer');
             if (countdownTimer) {
-                countdownTimer.textContent = 'Standby...';
+                countdownTimer.textContent = 'في الانتظار...';
                 countdownTimer.style.color = '#2ed573';
                 countdownTimer.style.fontWeight = 'normal';
-            }
-            
-            // Update language if needed
-            if (window.languageManager) {
-                window.languageManager.updateTexts(window.languageManager.getCurrentLanguage());
             }
         }
     }
@@ -199,17 +202,12 @@ class PoliceAccidents {
     markAccidentResolved(accidentId) {
         const accident = this.accidents.find(a => a.id === accidentId);
         if (accident) {
-            accident.status = 'resolved';
+            accident.status = 'تم_الحل';
             this.renderAccidents();
             
             // Stop continuous alerts if any are active
             if (window.audioManager) {
                 window.audioManager.stopContinuousAlert();
-            }
-            
-            // Update language if needed
-            if (window.languageManager) {
-                window.languageManager.updateTexts(window.languageManager.getCurrentLanguage());
             }
         }
     }
@@ -222,15 +220,28 @@ class PoliceAccidents {
             // Fallback to original alert system if audioManager is not available
             if (this.alertAudio) {
                 this.alertAudio.currentTime = 0;
-                this.alertAudio.play().catch(e => console.log('Audio play failed:', e));
+                this.alertAudio.play().catch(e => console.log('فشل تشغيل الصوت:', e));
             }
             
-            const text = `Traffic accident reported at ${accident.location}. ${accident.description}. Priority: ${accident.priority}.`;
+            const text = `تم الإبلاغ عن حادث مرور في ${accident.location}. ${accident.description}. الأولوية: ${accident.priority}.`;
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.rate = 0.8;
             utterance.volume = 0.8;
+            utterance.lang = 'ar-SA';
+            
+            // Try to find an Arabic voice
+            const voices = this.speechSynthesis.getVoices();
+            const arabicVoice = voices.find(voice => 
+                voice.lang.toLowerCase().includes('ar') || 
+                voice.name.toLowerCase().includes('arabic')
+            );
+            
+            if (arabicVoice) {
+                utterance.voice = arabicVoice;
+            }
             
             if (this.speechSynthesis) {
+                this.speechSynthesis.cancel(); // Cancel any ongoing speech
                 this.speechSynthesis.speak(utterance);
             }
         }
@@ -255,13 +266,13 @@ class PoliceAccidents {
 
     checkForNewAccidents() {
         // This method is kept for compatibility but auto-simulation handles new accidents now
-        console.log('Manual accident checking disabled - using auto-simulation system');
+        console.log('تم تعطيل التحقق اليدوي من الحوادث - استخدام نظام المحاكاة التلقائي');
     }
 
     startDataUpdates() {
         // Major data refresh every 30 seconds
         setInterval(() => {
-            console.log('Police Accidents: 30-second data refresh');
+            console.log('حوادث الشرطة: تحديث البيانات كل 30 ثانية');
         }, 30000);
     }
 }
