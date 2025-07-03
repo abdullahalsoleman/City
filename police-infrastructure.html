@@ -1,132 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Police Infrastructure Health</title>
-    <meta name="description" content="Police Infrastructure Monitoring Dashboard" />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="police_infrastructure_title">Police - Infrastructure Health</title>
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="stylesheet" href="src/css/dashboard.css">
     <link rel="stylesheet" href="src/css/components.css">
     <link rel="stylesheet" href="src/css/emergency.css">
     <link rel="stylesheet" href="src/css/rtl.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="min-h-screen bg-background text-foreground">
+    <div class="app-container">
         <!-- Header -->
-      <header class="header bg-card border-b border-border">
-        <div class="container mx-auto px-6 py-4 max-w-7xl">
-          <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-foreground">Police Infrastructure Health</h1>
-            <div class="flex items-center gap-6">
-              <div class="current-time text-muted-foreground" id="currentTime"></div>
-              <div class="status-indicator">
-                <span class="status-dot online"></span>
-                <span class="text-sm text-muted-foreground">System Online</span>
-                        </div>
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title" data-lang-key="police_infrastructure_title">Police - Infrastructure Health</h1>
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+                    <div class="current-time" id="currentTime"></div>
+                    <div class="status-indicator">
+                        <span class="status-dot online"></span>
+                        <span class="status-text" data-lang-key="system_online">System Online</span>
                     </div>
                 </div>
             </div>
         </header>
 
-      <!-- Service Navigation -->
-      <nav class="service-nav bg-card border-b border-border">
-        <div class="container mx-auto px-6 max-w-7xl">
-          <div class="flex gap-1">
-            <a href="police-traffic-lights.html" class="nav-tab">Traffic Light Monitoring</a>
-            <a href="police-accidents.html" class="nav-tab">Accident Management</a>
-            <a href="police-infrastructure.html" class="nav-tab active">Infrastructure Health</a>
-          </div>
+        <!-- Navigation -->
+        <nav class="service-nav">
+            <div class="nav-tabs">
+                <button class="nav-tab" onclick="window.location.href='police-traffic-lights.html'" data-lang-key="traffic_light_monitoring">Traffic Light Monitoring</button>
+                <button class="nav-tab" onclick="window.location.href='police-accidents.html'" data-lang-key="accident_management">Accident Management</button>
+                <button class="nav-tab active" onclick="window.location.href='police-infrastructure.html'" data-lang-key="infrastructure_health">Infrastructure Health</button>
             </div>
         </nav>
 
         <!-- Main Content -->
-      <main class="container mx-auto px-6 py-8 max-w-7xl">
-        <div class="mb-8">
-          <h2 class="text-2xl font-bold text-foreground mb-2">Infrastructure Health</h2>
+        <main class="main-content">
+            <section class="infrastructure-section">
+                <h2 data-lang-key="infrastructure_health">Infrastructure Health</h2>
 
-        </div>
-
-        <div class="space-y-8">
-          <!-- Camera Feeds Section -->
-          <section>
-            <h3 class="text-xl font-semibold text-foreground mb-6">Camera Feeds</h3>
+                <!-- Camera Feeds Section -->
+                <div class="camera-section">
+                    <h3 data-lang-key="camera_feeds">Camera Feeds</h3>
                     <div class="camera-grid">
-              <div class="camera-card">
+                        <div class="camera-card">
                             <div class="camera-header">
                                 <span class="camera-name">North Main Camera</span>
-                  <span class="status-badge online">Online</span>
+                                <span class="status-badge online">Online</span>
                             </div>
                             <div class="camera-display">
                                 <div class="camera-placeholder">
-                    <svg class="camera-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                      <circle cx="12" cy="13" r="3"/>
-                    </svg>
-                    <span>Live Feed</span>
+                                    <svg class="camera-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                        <circle cx="12" cy="13" r="3"/>
+                                    </svg>
+                                    <span>Live Feed</span>
                                 </div>
                             </div>
                         </div>
-                        
-              <div class="camera-card">
+
+                        <div class="camera-card">
                             <div class="camera-header">
                                 <span class="camera-name">South Main Camera</span>
-                  <span class="status-badge online">Online</span>
+                                <span class="status-badge online">Online</span>
                             </div>
                             <div class="camera-display">
                                 <div class="camera-placeholder">
-                    <svg class="camera-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                      <circle cx="12" cy="13" r="3"/>
-                    </svg>
-                    <span>Live Feed</span>
+                                    <svg class="camera-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                        <circle cx="12" cy="13" r="3"/>
+                                    </svg>
+                                    <span>Live Feed</span>
                                 </div>
                             </div>
                         </div>
 
-              <div class="camera-card">
+                        <div class="camera-card">
                             <div class="camera-header">
                                 <span class="camera-name">East Ave Camera</span>
-                  <span class="status-badge online">Online</span>
+                                <span class="status-badge online">Online</span>
                             </div>
                             <div class="camera-display">
                                 <div class="camera-placeholder">
-                    <svg class="camera-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                      <circle cx="12" cy="13" r="3"/>
-                    </svg>
-                    <span>Live Feed</span>
+                                    <svg class="camera-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                        <circle cx="12" cy="13" r="3"/>
+                                    </svg>
+                                    <span>Live Feed</span>
                                 </div>
                             </div>
                         </div>
 
-              <div class="camera-card">
+                        <div class="camera-card">
                             <div class="camera-header">
                                 <span class="camera-name">West Blvd Camera</span>
-                  <span class="status-badge online">Online</span>
+                                <span class="status-badge online">Online</span>
                             </div>
                             <div class="camera-display">
                                 <div class="camera-placeholder">
-                    <svg class="camera-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                      <circle cx="12" cy="13" r="3"/>
-                    </svg>
-                    <span>Live Feed</span>
+                                    <svg class="camera-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                        <circle cx="12" cy="13" r="3"/>
+                                    </svg>
+                                    <span>Live Feed</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-          </section>
+                </div>
 
-          <!-- Sensor Readings Section -->
-          <section>
-            <h3 class="text-xl font-semibold text-foreground mb-6">Sensor Readings</h3>
+                <!-- Sensor Readings Section -->
+                <div class="sensors-section">
+                    <h3 data-lang-key="sensor_readings">Sensor Readings</h3>
                     <div class="sensors-grid">
                         <div class="sensor-card">
                             <div class="sensor-header">
-                  <h4>Road Condition</h4>
-                  <span class="status-badge good">Good</span>
+                                <h4>Road Condition</h4>
+                                <span class="status-badge good">Good</span>
                             </div>
                             <div class="sensor-data">
                                 <div class="sensor-reading">
@@ -143,7 +151,7 @@
                         <div class="sensor-card">
                             <div class="sensor-header">
                                 <h4>Crack Detection</h4>
-                  <span class="status-badge warning">Crack Detected</span>
+                                <span class="status-badge warning">Crack Detected</span>
                             </div>
                             <div class="sensor-data">
                                 <div class="sensor-reading">
@@ -159,8 +167,8 @@
 
                         <div class="sensor-card">
                             <div class="sensor-header">
-                  <h4>Water Level</h4>
-                  <span class="status-badge normal">Normal</span>
+                                <h4>Water Level</h4>
+                                <span class="status-badge normal">Normal</span>
                             </div>
                             <div class="sensor-data">
                                 <div class="sensor-reading">
@@ -177,7 +185,7 @@
                         <div class="sensor-card">
                             <div class="sensor-header">
                                 <h4>Traffic Flow</h4>
-                  <span class="status-badge normal">Normal</span>
+                                <span class="status-badge normal">Normal</span>
                             </div>
                             <div class="sensor-data">
                                 <div class="sensor-reading">
@@ -188,244 +196,122 @@
                                     <span class="reading-label">Congestion:</span>
                                     <span class="reading-value">Low</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </section>
 
-          <!-- AI Processing Section -->
-          <section>
-            <h3 class="text-xl font-semibold text-foreground mb-6">AI Computer Vision Processing</h3>
-            <div class="ai-processing-grid">
-              <div class="ai-card">
-                <div class="ai-header">
-                  <h4>Object Detection (YOLO v5)</h4>
-                  <span class="status-badge online">Active</span>
-                </div>
-                <div class="ai-data">
-                  <div class="ai-metric">
-                    <span class="metric-label">Vehicles Detected:</span>
-                    <span class="metric-value" id="vehicles-detected">247</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Pedestrians:</span>
-                    <span class="metric-value" id="pedestrians-detected">18</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Processing Speed:</span>
-                    <span class="metric-value">45 FPS</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Accuracy:</span>
-                    <span class="metric-value">94.2%</span>
-                  </div>
-                </div>
-              </div>
+                <!-- AI Processing Section -->
+                <div class="ai-section">
+                    <h3 data-lang-key="ai_processing">AI Computer Vision Processing</h3>
+                    <div class="ai-processing-grid">
+                        <div class="ai-card">
+                            <div class="ai-header">
+                                <h4>Object Detection (YOLO v5)</h4>
+                                <span class="status-badge online">Active</span>
+                            </div>
+                            <div class="ai-data">
+                                <div class="ai-metric">
+                                    <span class="metric-label">Vehicles Detected:</span>
+                                    <span class="metric-value" id="vehicles-detected">247</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Pedestrians:</span>
+                                    <span class="metric-value" id="pedestrians-detected">18</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Processing Speed:</span>
+                                    <span class="metric-value">45 FPS</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Accuracy:</span>
+                                    <span class="metric-value">94.2%</span>
+                                </div>
+                            </div>
+                        </div>
 
-              <div class="ai-card">
-                <div class="ai-header">
-                  <h4>Traffic Analysis Engine</h4>
-                  <span class="status-badge online">Processing</span>
-                </div>
-                <div class="ai-data">
-                  <div class="ai-metric">
-                    <span class="metric-label">Queue Length Analysis:</span>
-                    <span class="metric-value">Real-time</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Congestion Prediction:</span>
-                    <span class="metric-value">85% Accuracy</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Signal Optimizations:</span>
-                    <span class="metric-value" id="optimizations-count">142</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Wait Time Reduction:</span>
-                    <span class="metric-value">23%</span>
-                  </div>
-                </div>
-              </div>
+                        <div class="ai-card">
+                            <div class="ai-header">
+                                <h4>Traffic Analysis Engine</h4>
+                                <span class="status-badge online">Processing</span>
+                            </div>
+                            <div class="ai-data">
+                                <div class="ai-metric">
+                                    <span class="metric-label">Queue Length Analysis:</span>
+                                    <span class="metric-value">Real-time</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Congestion Prediction:</span>
+                                    <span class="metric-value">85% Accuracy</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Signal Optimizations:</span>
+                                    <span class="metric-value" id="optimizations-count">142</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Wait Time Reduction:</span>
+                                    <span class="metric-value">23%</span>
+                                </div>
+                            </div>
+                        </div>
 
-              <div class="ai-card">
-                <div class="ai-header">
-                  <h4>Incident Detection AI</h4>
-                  <span class="status-badge online">Monitoring</span>
-                </div>
-                <div class="ai-data">
-                  <div class="ai-metric">
-                    <span class="metric-label">Accident Detection:</span>
-                    <span class="metric-value">0.8s Response</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Anomaly Detection:</span>
-                    <span class="metric-value">Active</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Emergency Alerts:</span>
-                    <span class="metric-value" id="emergency-alerts">3 Today</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">False Positive Rate:</span>
-                    <span class="metric-value">2.1%</span>
-                  </div>
-                </div>
-              </div>
+                        <div class="ai-card">
+                            <div class="ai-header">
+                                <h4>Incident Detection AI</h4>
+                                <span class="status-badge online">Monitoring</span>
+                            </div>
+                            <div class="ai-data">
+                                <div class="ai-metric">
+                                    <span class="metric-label">Accident Detection:</span>
+                                    <span class="metric-value">0.8s Response</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Anomaly Detection:</span>
+                                    <span class="metric-value">Active</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Emergency Alerts:</span>
+                                    <span class="metric-value" id="emergency-alerts">3 Today</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">False Positive Rate:</span>
+                                    <span class="metric-value">2.1%</span>
+                                </div>
+                            </div>
+                        </div>
 
-              <div class="ai-card">
-                <div class="ai-header">
-                  <h4>Reinforcement Learning</h4>
-                  <span class="status-badge online">Learning</span>
-                </div>
-                <div class="ai-data">
-                  <div class="ai-metric">
-                    <span class="metric-label">Model Training:</span>
-                    <span class="metric-value">Continuous</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Data Points/Hour:</span>
-                    <span class="metric-value">12.5K</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Improvement Rate:</span>
-                    <span class="metric-value">+0.3% Daily</span>
-                  </div>
-                  <div class="ai-metric">
-                    <span class="metric-label">Model Version:</span>
-                    <span class="metric-value">v2.4.1</span>
+                        <div class="ai-card">
+                            <div class="ai-header">
+                                <h4>Reinforcement Learning</h4>
+                                <span class="status-badge online">Learning</span>
+                            </div>
+                            <div class="ai-data">
+                                <div class="ai-metric">
+                                    <span class="metric-label">Model Training:</span>
+                                    <span class="metric-value">Continuous</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Data Points/Hour:</span>
+                                    <span class="metric-value">12.5K</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Improvement Rate:</span>
+                                    <span class="metric-value">+0.3% Daily</span>
+                                </div>
+                                <div class="ai-metric">
+                                    <span class="metric-label">Model Version:</span>
+                                    <span class="metric-value">v2.4.1</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-        </div>
         </main>
     </div>
 
-    <script>
-      // Update current time
-      function updateTime() {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('en-US', { 
-          hour12: false,
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
-        });
-        document.getElementById('currentTime').textContent = timeString;
-      }
-      
-      updateTime();
-      setInterval(updateTime, 1000);
-
-      // AI Processing Data Simulation
-      class AIProcessingSimulator {
-        constructor() {
-          this.vehiclesDetected = 247;
-          this.pedestriansDetected = 18;
-          this.optimizationsCount = 142;
-          this.emergencyAlerts = 3;
-          
-          this.init();
-        }
-
-        init() {
-          this.startDataUpdates();
-        }
-
-        updateAIMetrics() {
-          // Simulate vehicle detection changes
-          if (Math.random() < 0.3) {
-            this.vehiclesDetected += Math.floor(Math.random() * 10) - 5;
-            this.vehiclesDetected = Math.max(200, Math.min(300, this.vehiclesDetected));
-            
-            const vehiclesElement = document.getElementById('vehicles-detected');
-            if (vehiclesElement) {
-              vehiclesElement.textContent = this.vehiclesDetected;
-              this.animateUpdate(vehiclesElement);
-            }
-          }
-
-          // Simulate pedestrian detection changes
-          if (Math.random() < 0.2) {
-            this.pedestriansDetected += Math.floor(Math.random() * 6) - 3;
-            this.pedestriansDetected = Math.max(0, Math.min(50, this.pedestriansDetected));
-            
-            const pedestriansElement = document.getElementById('pedestrians-detected');
-            if (pedestriansElement) {
-              pedestriansElement.textContent = this.pedestriansDetected;
-              this.animateUpdate(pedestriansElement);
-            }
-          }
-
-          // Simulate optimization count increases
-          if (Math.random() < 0.1) {
-            this.optimizationsCount++;
-            const optimizationsElement = document.getElementById('optimizations-count');
-            if (optimizationsElement) {
-              optimizationsElement.textContent = this.optimizationsCount;
-              this.animateUpdate(optimizationsElement);
-            }
-          }
-
-          // Simulate emergency alerts (rarely)
-          if (Math.random() < 0.01) {
-            this.emergencyAlerts++;
-            const alertsElement = document.getElementById('emergency-alerts');
-            if (alertsElement) {
-              alertsElement.textContent = `${this.emergencyAlerts} Today`;
-              this.animateUpdate(alertsElement, 'alert');
-            }
-          }
-        }
-
-        animateUpdate(element, type = 'normal') {
-          element.style.transform = 'scale(1.1)';
-          element.style.transition = 'transform 0.2s ease';
-          
-          if (type === 'alert') {
-            element.style.background = 'rgba(255, 69, 58, 0.2)';
-            element.style.color = 'var(--error)';
-          }
-          
-          setTimeout(() => {
-            element.style.transform = 'scale(1)';
-            if (type === 'alert') {
-              setTimeout(() => {
-                element.style.background = '';
-                element.style.color = '';
-              }, 2000);
-            }
-          }, 200);
-        }
-
-        startDataUpdates() {
-          // Update AI metrics every 2 seconds
-          setInterval(() => {
-            this.updateAIMetrics();
-          }, 2000);
-
-          // Add processing indicators
-          setInterval(() => {
-            this.addProcessingIndicators();
-          }, 5000);
-        }
-
-        addProcessingIndicators() {
-          const processingBadges = document.querySelectorAll('.status-badge.processing, .status-badge.online');
-          processingBadges.forEach(badge => {
-            badge.style.opacity = '0.7';
-            setTimeout(() => {
-              badge.style.opacity = '1';
-            }, 300);
-          });
-        }
-      }
-
-      // Initialize AI Processing Simulator
-      document.addEventListener('DOMContentLoaded', () => {
-        new AIProcessingSimulator();
-      });
-    </script>
+    <script src="src/js/language.js"></script>
+    <script src="src/js/main.js"></script>
+    <script src="src/js/police-infrastructure.js"></script>
 </body>
 </html>
