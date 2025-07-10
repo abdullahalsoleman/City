@@ -98,7 +98,7 @@ class AnalyticsDashboard {
                             font: {
                                 size: 14
                             },
-                            color: '#fff'
+                            color: '#000000'
                         },
                         grid: {
                             color: 'rgba(255, 255, 255, 0.1)',
@@ -110,7 +110,7 @@ class AnalyticsDashboard {
                             font: {
                                 size: 14
                             },
-                            color: '#fff'
+                            color: '#000000'
                         },
                         grid: {
                             display: false
@@ -123,7 +123,7 @@ class AnalyticsDashboard {
                         position: 'top',
                         align: 'end',
                         labels: {
-                            color: '#fff',
+                            color: '#000000',
                             font: {
                                 size: 14
                             },
