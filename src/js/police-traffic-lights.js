@@ -275,9 +275,19 @@ class PoliceTrafficLights {
                     activeLight.classList.add('active');
                 }
 
-                // Add congestion indicator
-                intersection.className = intersection.className.replace(/congestion-\w+/g, '');
-                intersection.classList.add(`congestion-${light.trafficDensity}`);
+                // Update the outer card's color based on timer
+                const outerCard = intersection.closest('.traffic-intersection');
+                if (outerCard) {
+                    // Remove previous timer classes
+                    outerCard.classList.remove('timer-high', 'timer-low');
+                    
+                    // Add appropriate timer class based on threshold
+                    if (light.timer > 20) {
+                        outerCard.classList.add('timer-high');
+                    } else {
+                        outerCard.classList.add('timer-low');
+                    }
+                }
             }
         });
     }

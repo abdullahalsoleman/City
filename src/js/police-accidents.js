@@ -76,18 +76,16 @@ class PoliceAccidents {
             'حادث مركبة طوارئ'
         ];
         
-        const priorities = ['عالي', 'متوسط', 'منخفض'];
-        const priorityWeights = [0.4, 0.4, 0.2]; // 40% high, 40% medium, 20% low
+        const priorities = ['عالي', 'متوسط'];
+        const priorityWeights = [0.7, 0.3]; // 70% عالي, 30% متوسط
         
         // Weighted random selection for priority
         const randomPriority = Math.random();
         let selectedPriority;
         if (randomPriority < priorityWeights[0]) {
             selectedPriority = priorities[0]; // عالي
-        } else if (randomPriority < priorityWeights[0] + priorityWeights[1]) {
-            selectedPriority = priorities[1]; // متوسط
         } else {
-            selectedPriority = priorities[2]; // منخفض
+            selectedPriority = priorities[1]; // متوسط
         }
         
         const newAccident = {
@@ -105,6 +103,8 @@ class PoliceAccidents {
         // Start continuous alert for the new accident
         if (window.audioManager) {
             window.audioManager.startContinuousAlert(newAccident, 'police');
+        } else {
+            this.playAlert(newAccident);
         }
         
         console.log('محاكاة تلقائية: حادث مرور جديد:', newAccident);
@@ -116,7 +116,7 @@ class PoliceAccidents {
                 id: 1,
                 location: 'شارع الشمال الرئيسي وشارع الأول',
                 description: 'تصادم بين مركبتين يعيق المسار الشمالي',
-                status: 'تم الحل',
+                status: 'غير_محلول',
                 priority: 'عالي',
                 time: new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })
             },
@@ -145,7 +145,7 @@ class PoliceAccidents {
             
             accidentCard.innerHTML = `
                 <div class="accident-header">
-                    <div class="accident-priority ${accident.priority}">
+                    <div class="accident-priority ${accident.priority === 'عالي' ? 'high' : 'medium'}">
                         <span>الأولوية</span>: <span>${accident.priority}</span>
                     </div>
                     <div class="accident-status ${accident.status.replace('_', '-')}">${accident.status.replace('_', ' ')}</div>
